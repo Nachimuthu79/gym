@@ -1,0 +1,52 @@
+body{
+    font-size: 14px;
+
+}
+
+
+
+/* Ripple effect */
+.ripple {
+  background-position: center;
+  transition: background 0.8s;
+}
+.ripple:hover {
+  background: #47a7f5 radial-gradient(circle, transparent 1%, #47a7f5 1%) center/15000%;
+}
+.ripple:active {
+  background-color: #6eb9f7;
+  background-size: 100%;
+  transition: background 0s;
+}
+.adn-btn
+{
+max-width: 200px;
+    float: right;
+  border: none;
+  border-radius: 2px;
+      padding: 8px 12px;
+    font-size: 14px;
+  cursor: pointer;
+  color: white;
+  background-color: #2196f3;
+  box-shadow: 0 0 4px #999;
+  outline: none !important;
+}
+.ebin-tile
+{
+    margin-top: 10px;
+}
+
+.bootstrap-datetimepicker-widget {
+    z-index: 9999;
+
+}
+
+.ebton
+{
+background: #ffff73;
+    font-weight: 500;
+    font-size: 15px;
+    padding: 8px 25px;
+    color: #0f5ca6;
+}
