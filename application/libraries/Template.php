@@ -36,10 +36,24 @@ class Template {
 		else
 		{
 				$this->CI->load->view($this->template.'/menu',$data);
-			    $this->CI->load->view($this->template.'/'.$data['path'],$data);
-
-			
+				$le_error = 0;
+				
+				if(isset($data['condition']) && $data['condition']) {
+					$c = $data['condition'];
+					if(isset($c['brach_select'] ) && $c['brach_select'] == 1 && !$this->CI->auth->active_branch)
+					{
+							$le_error = 1;
+							$this->CI->load->view($this->template.'/common/not-branch-selected',$data);
+					}
+				}
+				
+				
+				if($le_error == 0)
+				{
+					$this->CI->load->view($this->template.'/'.$data['path'],$data);
+				}
 		}
+		
 		
 		$this->CI->load->view($this->template.'/footer',$data);
 		
@@ -128,6 +142,28 @@ class Template {
 	function redirect($u) {
 		
 		redirect(site_url($u));
+	}
+	
+	
+	function list_permissions($u) {
+		
+		
+		switch ($u) {
+			
+			case 'manager' :
+			
+			return array(
+							array('name'=>'dashboard', 'label'=> 'Dashboard' ,'editable' => 0 ),
+							array('name'=>'trainer', 'label'=> 'Trainer' ,'editable' => 1 ),
+							array('name'=>'staff', 'label'=> 'Staff' ,'editable' => 1 ),
+							array('name'=>'client', 'label'=> 'Client' ,'editable' => 1 )
+						);
+			break;
+			
+			
+			
+		}
+		
 	}
 	
 	

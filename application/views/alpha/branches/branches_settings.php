@@ -22,10 +22,7 @@
 			
 			
 			
-              <!-- /.card-header -->
-              <!-- form start -->
-              <form role="form" id="form" action="" method="post">
-                <div class="card-body">
+             <div class="card-body">
 					
 				<div class="row">
 					  <div class="col-md-6">
@@ -47,18 +44,105 @@
                   
                   	<div class="row">
 					  <div class="col-md-12"><br>
-						                      <h5 >Time Slots</h5>
+
+
+
+	
+                <a href="<?php echo site_url('branches/add_timeslot/'.$branch_details['branch_id']); ?>"><button type="button" class="adn-btn ripple">Add New Timeslot</button></a>
 
                
                                     </div>
+                                    
+                                 						                      <h5 >Time Slots</h5>
+   
+                      <?php 
+                      $timeslot_max_b = array();
+                      $timeslot_slots = array();
+                      $slots = array();
+                      
+                      foreach($timeslots as $f)
+                      {
+						  $slots[$f['day']][] = $f;
+						  $timeslot_max_b[$f['day']]=isset($timeslot_max_b[$f['day']]) ? $timeslot_max_b[$f['day']]+$f['maximum_booking'] :$f['maximum_booking']; 
+							$timeslot_slots[$f['day']]= isset($timeslot_slots[$f['day']]) ? $timeslot_slots[$f['day']]+1 :1; 
+					  }
+                      
+                      ?>
+                                  <table class="table table-bordered">
+                  <thead>                  
+                    <tr>
+                      <th>Day</th>
+                      <th>Total Slots</th>
+                      <th>Total Max. Booking</th>
+                      <th></th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                  <?php 			 $dayNames = array( 'Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday');
+				$actives = 0;
+				foreach($dayNames as $d)
+				{
+					if (isset($timeslot_slots[$d]) )
+					{
+						$actives++;
+					?>
+					 <tr>
+                      <td><?php echo $d; ?></td>
+                      <td><?php echo isset($timeslot_slots[$d]) ? $timeslot_slots[$d] : 0; ?></td>
+                      <td><?php echo isset($timeslot_max_b[$d]) ? $timeslot_max_b[$d] : 0; ?></td>
+                      <td>	<table  id="tabber<?php  echo $d; ?>" class="table slot-details table-bordered">
+							<thead>                  
+							<tr>
+							  <th>Slot Name</th>
+							  <th>Max. Booking</th>
+							  <th>Time</th>
+							  <th>Status</th>
+							  <th></th>
+							</tr>
+							</thead>
+							<?php
+							foreach($slots[$d] as $e)
+							{
+							?><tr>
+								 <td style="    max-width: 100px;"><?php echo $e['name']; ?></td>
+								 <td><?php echo $e['maximum_booking']; ?></td>
+								 <td><?php echo $e['start_time'].' - '.$e['end_time']; ?></td>
+								 <td><?php echo ($e['status'])? 'Active' : 'Deactive'; ?></td>
+								 <td> <a href="<?php echo site_url('branches/edit_timeslot/'.$branch_details['branch_id'].'/'.$e['slot_id']); ?>">
+								 <button type="button" class="btn btn-warning btn-sm">Edit Slot</button> </a>
+								 &nbsp; <a onclick="return confirm('Are sure to delete the slot?')" href="<?php echo site_url('branches/delete_timeslot/'.$branch_details['branch_id'].'/'.$e['slot_id']); ?>">
+								 <button type="button" class="btn btn-danger btn-sm">Delete</button> </a></td>
+								 </tr>
+							<?php
+							}
+							?>
+                      
+							</table>
+                      </td>
+                    </tr>
+					<?php
+					}
+				}
+				
+				if($actives == 0 )
+				{
+					?>
+					 <tr>
+                      <td colspan="4">No Timeslots Available</td	>
+                    </tr>
+					<?php
+				}
+				?> 
+                  </tbody>
+                </table>
+                
+                
+                           
+                                    
                   </div>
 
                 </div>
-                <!-- /.card-body -->
-                <div class="card-footer text-right">
-                  <button type="submit" class="btn btn-primary ripple">Save Settings</button>
-                </div>
-              </form>
+               
             </div>
             <!-- /.card -->
             </div>
@@ -74,85 +158,4 @@
     </section>
     
     
-<?php 
 
-$js = <<<EOD
-
-<script type="text/javascript">
-$(document).ready(function () {
-
-
-  $.validator.setDefaults({
-    submitHandler: function () {
-    
-    return true;
-    }
-  });
-  
-  $('#form').validate({
-    rules: {
-      email: {
-        required: true,
-        email: true,
-      },
-      name: {
-        required: true,
-      },
-      address_line1: {
-        required: true,
-      },
-      address_line2: {
-        required: true,
-      },
-      city: {
-        required: true,
-      }
-    },
-    messages: {
-      email: {
-        required: "Please enter a email address",
-        email: "Please enter a vaild email address"
-      },
-      password: {
-        required: "Please enter a name",
-      }
-    },
-    errorElement: 'span',
-    errorPlacement: function (error, element) {
-      error.addClass('invalid-feedback');
-      element.closest('.form-group').append(error);
-    },
-    highlight: function (element, errorClass, validClass) {
-      $(element).addClass('is-invalid');
-    },
-    unhighlight: function (element, errorClass, validClass) {
-      $(element).removeClass('is-invalid');
-    }
-  });
-  
-  $("input[data-bootstrap-switch]").each(function(){
-      $(this).bootstrapSwitch('state', $(this).prop('checked'));
-    });
-    
-    
-    $(".timeslot").click(function(){
-    
-		v = '.timer'+$(this).val();
-		if($(this).prop('checked') == true) {
-			$(v).attr('disabled',false);
-		}
-		else
-		{
-			$(v).attr('disabled',true);
-		}
-	});
-});
-
-
-</script>
-
-
-EOD;
-
-   
-$this->template->customJS = $js;

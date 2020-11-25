@@ -21,7 +21,8 @@ class Dashboard extends CI_Controller {
 	public function index()
 	{
 		
-		
+	  $this->auth->has_PagePermission('dashboard');
+
 		$data['pagename'] = 'dashboard';
 		$data['pagetitle'] = 'Dashboard';
 		$data['path'] = 'dashboard/dashboard';
@@ -39,10 +40,33 @@ class Dashboard extends CI_Controller {
 				$this->template->notification('warning','Unable to Change the Branch');
 				$this->template->redirect('dashboard');
 		 }
+		
+			$this->template->notification('success','Branch Switched Successfully');
 		 
 		 $this->session->set_userdata('active_branch',$branch_id);
-		 $this->template->redirect('dashboard');
+		 
+		 if($this->input->get('redirect'))
+		 {
+			redirect($this->input->get('redirect')); 
+		 }
+		 else
+		 {
+			$this->template->redirect('dashboard');
+		}
 
 		 
 	 }
+	 
+	 function username_check() {
+		 
+		  $this->auth->has_PagePermission('dashboard');
+		  
+		   if($this->input->post())
+		 {
+			echo $this->common_mdl->username_validation($this->input->post('username'));
+		 }
+		  
+	 }
+	 
+	 
 }

@@ -37,7 +37,7 @@
 		}
 		else
 		{
-			echo '<span class="ebton">'.$this->auth->active_branch_details['name'].'</span>';
+			echo '<span class="btn btn-warning btn-sm">'.$this->auth->active_branch_details['name'].'</span>';
 		}
 	?>
 	 </a>
@@ -50,7 +50,7 @@
 			<?php foreach($branches as $branch) 
 			{
 		?> 
-          <a href="<?php echo site_url('dashboard/branch_change/'.$branch['branch_id']); ?>" class="dropdown-item">
+          <a href="<?php echo site_url('dashboard/branch_change/'.$branch['branch_id']).'?redirect='.get_current_url(); ?>" class="dropdown-item">
             <!-- Message Start -->
             <div class="media">
               <div class="media-body">

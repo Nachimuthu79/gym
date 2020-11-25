@@ -50,3 +50,13 @@ background: #ffff73;
     padding: 8px 25px;
     color: #0f5ca6;
 }
+
+.qw-meg
+{    text-align: center;
+    margin-top: 20%;
+
+}
+
+input[type="checkbox"][readonly] {
+  pointer-events: none;
+}

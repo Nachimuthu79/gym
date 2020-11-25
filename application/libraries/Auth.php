@@ -29,7 +29,7 @@ class Auth {
 			$this->CI->db->select('*');
 			$this->CI->db->from('user');
 			$this->CI->db->where('user_id',$userid);
-			$this->CI->db->where('is_blocked',0);
+			$this->CI->db->where('status',1);
 			$this->CI->db->where('is_deleted',0);
 			$ve=$this->CI->db->get();
 			
@@ -82,6 +82,7 @@ class Auth {
 		if($this->is_superuser == 0 ) {
 			$this->CI->db->where('status',1);
 		}
+		$this->CI->db->where('is_deleted', 0); 
 		$t = $this->CI->db->get('branches');
 		
 		if($t->result_array())

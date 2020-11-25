@@ -159,8 +159,6 @@ function __construct() {
 		$data['pagename'] = 'branch';
 		$data['pagetitle'] = 'Brances';
 		$data['path'] = 'branches/branches_settings';
-		$data['plugins']['jQueryValidate'] = 1 ;
-		$data['plugins']['switchButton'] = 1 ;
 		$data['branch_details'] = $branch_details;
 		$data['timeslots'] = $this->branch_mdl->get_timeslots($branch_id);
 
@@ -168,6 +166,144 @@ function __construct() {
 		$this->template->load_template($data);
 		
 	}
+	
+	
+	function add_timeslot($branch_id)
+	{
+		
+		
+		$this->auth->has_PagePermission('branch');
+		
+		$branch_details = $this->branch_mdl->get_branch($branch_id);
+		
+		if(!$branch_details) {
+			
+				$this->template->notification('warning','Requested Branch Not available');
+				$this->template->redirect('branches');
+		}
+		
+		if($this->input->post())
+		{
+			$slot_id = $this->branch_mdl->add_timeslot($branch_id);
+			
+			if($slot_id) {
+				$this->template->notification('success','New Timeslot added Successfully');
+				$this->template->redirect('branches/edit_timeslot/'.$branch_id.'/'.$slot_id);
+
+			}
+			else
+			{
+				$this->template->notification('warning','Unable to add the Timeslot');
+				$this->template->redirect('branches');
+			}
+		}
+		
+	
+		$data['pagename'] = 'branch';
+		$data['pagetitle'] = 'Brances';
+		$data['path'] = 'branches/add_timeslot';
+		$data['plugins']['jQueryValidate'] = 1 ;
+		$data['plugins']['dateRange'] = 1 ;
+				$data['plugins']['switchButton'] = 1 ;
+
+		$data['branch_details'] = $branch_details;
+
+		
+		$this->template->load_template($data);
+		
+	}
+	
+	function edit_timeslot($branch_id,$timeslot_id)
+	{
+		
+		
+		$this->auth->has_PagePermission('branch');
+		
+		$branch_details = $this->branch_mdl->get_branch($branch_id);
+		$timeslot_details = $this->branch_mdl->get_timeslot($branch_id,$timeslot_id);
+		
+		if(!$branch_details) {
+			
+				$this->template->notification('warning','Requested Branch Not available');
+				$this->template->redirect('branches');
+		}
+		
+		if(!$timeslot_details) {
+			
+				$this->template->notification('warning','Requested Timeslot Not available');
+				$this->template->redirect('branches');
+		}
+		
+		
+		if($this->input->post())
+		{
+			$slot_id = $this->branch_mdl->edit_timeslot($branch_id,$timeslot_id);
+			
+			if($slot_id) {
+				$this->template->notification('success','Timeslot updated Successfully');
+				$this->template->redirect('branches/edit_timeslot/'.$branch_id.'/'.$slot_id);
+
+			}
+			else
+			{
+				$this->template->notification('warning','Unable to add the Timeslot');
+				$this->template->redirect('branches');
+			}
+		}
+		
+		
+	
+		$data['pagename'] = 'branch';
+		$data['pagetitle'] = 'Brances';
+		$data['path'] = 'branches/edit_timeslot';
+		$data['plugins']['jQueryValidate'] = 1 ;
+		$data['plugins']['dateRange'] = 1 ;
+		$data['plugins']['switchButton'] = 1 ;
+
+		$data['branch_details'] = $branch_details;
+		$data['timeslot_details'] = $timeslot_details;
+
+		
+		$this->template->load_template($data);
+		
+	}
+	
+	
+	function delete_timeslot($branch_id,$timeslot_id)
+	{
+		
+		
+		$this->auth->has_PagePermission('branch');
+		
+		$branch_details = $this->branch_mdl->get_branch($branch_id);
+		$timeslot_details = $this->branch_mdl->get_timeslot($branch_id,$timeslot_id);
+		
+		if(!$branch_details) {
+			
+				$this->template->notification('warning','Requested Branch Not available');
+				$this->template->redirect('branches');
+		}
+		
+		if(!$timeslot_details) {
+			
+				$this->template->notification('warning','Requested Timeslot Not available');
+				$this->template->redirect('branches');
+		}
+		
+		
+		if($this->branch_mdl->delete_slot($branch_id,$timeslot_id)) {
+			
+				$this->template->notification('success','Slot deleted successfully');
+				$this->template->redirect('branches/settings/'.$branch_id.'/'.$timeslot_id);
+		}
+		else
+		{
+				$this->template->notification('warning','Requested Slot Not available');
+				$this->template->redirect('branches');
+		}
+		
+	}
+	
 	
 	function delete($branch_id)
 	{

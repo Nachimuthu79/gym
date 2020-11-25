@@ -16,7 +16,7 @@ class Login_mdl extends CI_Model {
 			$this->db->from('user');
 			$this->db->where('username',$username);
 			$this->db->where('password',md5($password));
-			$this->db->where('is_blocked',0);
+			$this->db->where('status',1);
 			$this->db->where('is_deleted',0);
 			$ve=$this->db->get();
 			
