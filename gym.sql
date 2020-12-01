@@ -1,13 +1,15 @@
 -- phpMyAdmin SQL Dump
--- version 4.5.4.1deb2ubuntu2.1
--- http://www.phpmyadmin.net
+-- version 4.9.2
+-- https://www.phpmyadmin.net/
 --
--- Host: localhost
--- Generation Time: Nov 25, 2020 at 10:47 AM
--- Server version: 5.6.16-1~exp1
--- PHP Version: 7.4.4
+-- Host: 127.0.0.1
+-- Generation Time: Dec 01, 2020 at 03:35 PM
+-- Server version: 10.4.10-MariaDB
+-- PHP Version: 7.3.23
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT = 0;
+START TRANSACTION;
 SET time_zone = "+00:00";
 
 
@@ -183,6 +185,39 @@ INSERT INTO `rv_manager` (`manager_id`, `user_id`, `name`, `email_address`, `mob
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `rv_staff`
+--
+
+CREATE TABLE `rv_staff` (
+  `staff_id` int(11) NOT NULL,
+  `name` varchar(256) NOT NULL,
+  `email_address` varchar(256) NOT NULL,
+  `username` varchar(256) NOT NULL,
+  `password` varchar(256) NOT NULL,
+  `employee_type` int(10) NOT NULL,
+  `dob` varchar(256) NOT NULL,
+  `gender` int(11) NOT NULL,
+  `phone` varchar(256) NOT NULL,
+  `monthly_salary` varchar(256) NOT NULL,
+  `sales_target` varchar(256) NOT NULL,
+  `monthly_target` varchar(256) NOT NULL,
+  `daily_target` varchar(256) NOT NULL,
+  `address_line1` varchar(500) NOT NULL,
+  `address_line2` varchar(500) NOT NULL,
+  `city` varchar(200) NOT NULL,
+  `document` varchar(256) DEFAULT NULL,
+  `profile_pic` varchar(256) DEFAULT NULL,
+  `discount` varchar(200) NOT NULL,
+  `branch_id` int(11) NOT NULL,
+  `status` varchar(11) NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  `is_deleted` int(11) DEFAULT 0
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `rv_trainer`
 --
 
@@ -190,15 +225,25 @@ CREATE TABLE `rv_trainer` (
   `trainer_id` int(11) NOT NULL,
   `name` varchar(255) NOT NULL,
   `email_address` varchar(255) NOT NULL,
+  `username` varchar(255) NOT NULL,
+  `password` varchar(255) NOT NULL,
+  `dob` varchar(250) NOT NULL,
   `phone` varchar(255) NOT NULL,
   `gender` varchar(100) NOT NULL,
+  `monthly_salary` varchar(256) NOT NULL,
+  `training_commision` varchar(256) NOT NULL,
+  `sales_target` varchar(256) NOT NULL,
+  `daily_target` varchar(256) NOT NULL,
+  `monthly_target` varchar(256) NOT NULL,
   `address_line1` varchar(255) NOT NULL,
   `address_line2` varchar(255) NOT NULL,
-  `city` varchar(255) NOT NULL,
-  `pincode` varchar(255) NOT NULL,
-  `salary` decimal(6,2) NOT NULL,
-  `profile_pic` varchar(255) NOT NULL,
-  `document` varchar(255) NOT NULL
+  `city` varchar(256) NOT NULL,
+  `profile_pic` varchar(255) DEFAULT NULL,
+  `document` varchar(255) DEFAULT NULL,
+  `status` varchar(256) NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  `is_deleted` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -432,6 +477,12 @@ ALTER TABLE `rv_manager`
   ADD PRIMARY KEY (`manager_id`);
 
 --
+-- Indexes for table `rv_staff`
+--
+ALTER TABLE `rv_staff`
+  ADD PRIMARY KEY (`staff_id`);
+
+--
 -- Indexes for table `rv_trainer`
 --
 ALTER TABLE `rv_trainer`
@@ -470,41 +521,56 @@ ALTER TABLE `rv_user_role_association`
 --
 ALTER TABLE `rv_branches`
   MODIFY `branch_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+
 --
 -- AUTO_INCREMENT for table `rv_branches_timeslot`
 --
 ALTER TABLE `rv_branches_timeslot`
   MODIFY `slot_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+
 --
 -- AUTO_INCREMENT for table `rv_employee`
 --
 ALTER TABLE `rv_employee`
   MODIFY `employee_id` int(11) NOT NULL AUTO_INCREMENT;
+
 --
 -- AUTO_INCREMENT for table `rv_log`
 --
 ALTER TABLE `rv_log`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
 --
 -- AUTO_INCREMENT for table `rv_log_login`
 --
 ALTER TABLE `rv_log_login`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
 --
 -- AUTO_INCREMENT for table `rv_manager`
 --
 ALTER TABLE `rv_manager`
   MODIFY `manager_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+
+--
+-- AUTO_INCREMENT for table `rv_staff`
+--
+ALTER TABLE `rv_staff`
+  MODIFY `staff_id` int(11) NOT NULL AUTO_INCREMENT;
+
 --
 -- AUTO_INCREMENT for table `rv_trainer`
 --
 ALTER TABLE `rv_trainer`
   MODIFY `trainer_id` int(11) NOT NULL AUTO_INCREMENT;
+
 --
 -- AUTO_INCREMENT for table `rv_user`
 --
 ALTER TABLE `rv_user`
   MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
+COMMIT;
+
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

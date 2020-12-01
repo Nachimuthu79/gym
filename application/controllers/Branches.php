@@ -36,8 +36,7 @@ function __construct() {
 			$this->branch_mdl->branch_listing();
 			exit;	
 		}
-		
-		
+
 		$data['pagename'] = 'branch';
 		$data['pagetitle'] = 'Branches';
 		$data['path'] = 'branches/branches';
@@ -46,8 +45,6 @@ function __construct() {
 		$this->template->load_template($data);
 		 
 	}
-	
-	
 	
 	function add()
 	{

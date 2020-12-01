@@ -99,51 +99,38 @@
 
     <!-- Sidebar -->
     <div class="sidebar">
-   
-
       <!-- Sidebar Menu -->
       <nav class="mt-2">
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
          
-         <?php 
-         
-         $menus = array();
-         
-         $menus[] = array('name'=>'branch' ,'label' => 'Branches' , 'link' => site_url('branches'),'icon'=> 'fa-tachometer-alt' );
-         $menus[] = array('name'=>'manager' ,'label' => 'Managers' , 'link' => site_url('managers'),'icon'=> 'fa-tachometer-alt' );
-         $menus[] = array('name'=>'trainer' ,'label' => 'Trainers' , 'link' => site_url('trainers'),'icon'=> 'fa-tachometer-alt' );
-         $menus[] = array('name'=>'staff' ,'label' => 'Staffs' , 'link' => site_url('staff'),'icon'=> 'fa-tachometer-alt' );
-         $menus[] = array('name'=>'client' ,'label' => 'Clients' , 'link' => site_url('clients'),'icon'=> 'fa-tachometer-alt' );
-         
-         
-         
-         
-         foreach($menus as $m) {
-			 
-			 echo ' <li class="nav-item ">
-            <a href="'.$m['link'].'" class="nav-link '.(($pagename== $m['name']) ?  'active' : '') .'">
-              '.(isset($m['icon']) ? '<i class="nav-icon fas '.$m['icon'].'"></i>' : '').'
-              <p>
-                '.$m['label'].'
-              </p>
-            </a>
-          </li>';
-			 
-		 }
+         <?php
+
+             $menus = array();
+             $menus[] = array('name'=>'branch' ,'label' => 'Branches' , 'link' => site_url('branches'),'icon'=> 'fa-tachometer-alt' );
+             $menus[] = array('name'=>'manager' ,'label' => 'Managers' , 'link' => site_url('managers'),'icon'=> 'fa-tachometer-alt' );
+             $menus[] = array('name'=>'trainer' ,'label' => 'Trainers' , 'link' => site_url('trainers'),'icon'=> 'fa-tachometer-alt' );
+             $menus[] = array('name'=>'staff' ,'label' => 'Staffs' , 'link' => site_url('staff'),'icon'=> 'fa-tachometer-alt' );
+             $menus[] = array('name'=>'client' ,'label' => 'Clients' , 'link' => site_url('clients'),'icon'=> 'fa-tachometer-alt' );
+
+             foreach($menus as $m) {
+                 echo ' <li class="nav-item ">
+                <a href="'.$m['link'].'" class="nav-link '.(($pagename== $m['name']) ?  'active' : '') .'">
+                  '.(isset($m['icon']) ? '<i class="nav-icon fas '.$m['icon'].'"></i>' : '').'
+                  <p>
+                    '.$m['label'].'
+                  </p>
+                </a>
+              </li>';
+
+             }
           ?>
-         
-       
-         
-         
-         
+
         </ul>
       </nav>
       <!-- /.sidebar-menu -->
     </div>
     <!-- /.sidebar -->
   </aside>
-
-  
 
    <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
