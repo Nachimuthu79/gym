@@ -40,10 +40,16 @@ if(isset($plugins) && is_array($plugins) ) {
 				$js[]= array('plugins/bootstrap-switch/js/bootstrap-switch.min.js');
 			}
 			
+		
+			if($pluginname == "daterangepicker") {
+				$js[]= array('plugins/moment/moment.min.js');
+				$js[]= array('plugins/daterangepicker/daterangepicker.js');
+			}
 			if($pluginname == "dateRange") {
 				$js[]= array('plugins/moment/moment.min.js');
 				$js[]= array('plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js');
 			}
+			
 		}
 	}
 }
@@ -96,7 +102,19 @@ if(isset($plugins) && is_array($plugins) ) {
 
 	}
 							
-	echo $this->template->customJS;	 	 				
+	echo $this->template->customJS;	 
+	
+	
+	
+	
+$js = array(
+									array('dist/js/adminlte.js'),
+									array('dist/js/demo.js')
+									);
+									
+										$this->template->loadJS($js); 
+
+	 				
 	
 	
 	

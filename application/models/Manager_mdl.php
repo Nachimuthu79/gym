@@ -88,7 +88,7 @@ class Manager_mdl extends CI_Model {
 		$search = $this->input->get('search')['value'];
 		
 		
-		$fields = array('name','username','data_created','status');
+		$fields = array('m.name','username','data_created','status'); 
 		
 		$this->db->from('user u');
 		$this->db->join('user_role_association as r','u.user_id = r.user_id');

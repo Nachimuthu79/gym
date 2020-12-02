@@ -1,5 +1,3 @@
-
-
 <body class="hold-transition sidebar-mini layout-fixed layout-navbar-fixed layout-footer-fixed">
 <div class="wrapper">
   <!-- Navbar -->
@@ -16,10 +14,6 @@
         <a href="<?php echo site_url('login/logout') ?>" class="nav-link">Logout</a>
       </li>
     </ul>
-
-<!--
-   
--->
 
 <?php 	if($this->auth->is_superuser == 1) {
 	?>
@@ -99,38 +93,90 @@
 
     <!-- Sidebar -->
     <div class="sidebar">
+   
+
       <!-- Sidebar Menu -->
       <nav class="mt-2">
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
          
-         <?php
+         <?php 
+         
+         $menus = array();
+         
+         $menus[] = array('name'=>'branch' ,'label' => 'Branches' , 'link' => site_url('branches'),'icon'=> 'fa-tachometer-alt' );
+         $menus[] = array('name'=>'manager' ,'label' => 'Managers' , 'link' => site_url('managers'),'icon'=> 'fa-tachometer-alt' );
+         $menus[] = array('name'=>'trainer' ,'label' => 'Trainers' , 'link' => site_url('trainers'),'icon'=> 'fa-tachometer-alt' );
+         $menus[] = array('name'=>'staff' ,'label' => 'Staffs' , 'link' => site_url('staff'),'icon'=> 'fa-tachometer-alt' );
+         $menus[] = array('name'=>'client' ,'label' => 'Clients' , 'link' => site_url('clients'),'icon'=> 'fa-tachometer-alt' );
+         $menus[] = array('name'=>'package' ,'label' => 'Package' , 'icon'=> 'fa-tachometer-alt' , 'type' => 'listing',
+								'listing' => array( 
+					'normal_package' => array('label' => 'Normal Packages', 'link' => site_url('packages') ), 
+					'group_package' => array('label' => 'Group Packages' ,'link' => site_url('packages/group') ), 
+					'personal_package' => array('label' => 'Personal Packages', 'link' => site_url('packages/personal') ), 
+												));
+         
+        $menus[] = array('name'=>'expense' ,'label' => 'Expenses' , 'link' => site_url('expenses'),'icon'=> 'fa-tachometer-alt' );
 
-             $menus = array();
-             $menus[] = array('name'=>'branch' ,'label' => 'Branches' , 'link' => site_url('branches'),'icon'=> 'fa-tachometer-alt' );
-             $menus[] = array('name'=>'manager' ,'label' => 'Managers' , 'link' => site_url('managers'),'icon'=> 'fa-tachometer-alt' );
-             $menus[] = array('name'=>'trainer' ,'label' => 'Trainers' , 'link' => site_url('trainers'),'icon'=> 'fa-tachometer-alt' );
-             $menus[] = array('name'=>'staff' ,'label' => 'Staffs' , 'link' => site_url('staff'),'icon'=> 'fa-tachometer-alt' );
-             $menus[] = array('name'=>'client' ,'label' => 'Clients' , 'link' => site_url('clients'),'icon'=> 'fa-tachometer-alt' );
-
-             foreach($menus as $m) {
-                 echo ' <li class="nav-item ">
-                <a href="'.$m['link'].'" class="nav-link '.(($pagename== $m['name']) ?  'active' : '') .'">
-                  '.(isset($m['icon']) ? '<i class="nav-icon fas '.$m['icon'].'"></i>' : '').'
-                  <p>
-                    '.$m['label'].'
-                  </p>
+         
+         
+         foreach($menus as $m) {
+			
+          if(isset($m['type']) && $m['type'] =="listing" ) {
+          
+          
+          echo '   <li class="nav-item has-treeview '.(($pagename== $m['name']) ?  'menu-open"' : '') .'">
+            <a href="#" class="nav-link '.(($pagename== $m['name']) ?  'active"' : '') .'">
+              <i class="nav-icon fas fa-chart-pie"></i>
+              <p>
+                 '.$m['label'].'
+                <i class="right fas fa-angle-left"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">';
+            
+            foreach($m['listing'] as $n=>$listing )
+		{
+            echo ' <li class="nav-item">
+                <a  href="'.$listing['link'].'" class="nav-link '.(($sub_pagename==$n) ?  'active' : '') .'" >
+                  <i class="far fa-circle nav-icon"></i>
+                  <p> '.$listing['label'].'</p>
                 </a>
               </li>';
-
-             }
+		  }
+              
+           echo ' </ul>
+          </li>';
+          
+	  }
+	  else
+	  {
+           
+			 echo ' <li class="nav-item ">
+            <a href="'.$m['link'].'" class="nav-link '.(($pagename== $m['name']) ?  'active' : '') .'">
+              '.(isset($m['icon']) ? '<i class="nav-icon fas '.$m['icon'].'"></i>' : '').'
+              <p>
+                '.$m['label'].'
+              </p>
+            </a>
+          </li>';
+	  }
+	  
+			 
+		 }
           ?>
-
+         
+       
+         
+         
+         
         </ul>
       </nav>
       <!-- /.sidebar-menu -->
     </div>
     <!-- /.sidebar -->
   </aside>
+
+  
 
    <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">

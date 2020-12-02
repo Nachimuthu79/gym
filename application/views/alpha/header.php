@@ -31,6 +31,9 @@ if(isset($plugins) && is_array($plugins) ) {
 			if($pluginname == "dateRange") {
 			$css[] = array('plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css'); 
 			}
+			if($pluginname == "daterangepicker") {
+			$css[] = array('plugins/daterangepicker/daterangepicker.css'); 
+			}
 			
 			
 		}

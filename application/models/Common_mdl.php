@@ -44,6 +44,7 @@ class Common_mdl extends CI_Model {
 		 $data['branch_id'] = $this->auth->active_branch;
 		 $data['username'] = $input['username'];
 		 $data['password'] = md5($input['password']);
+		 $data['name'] = $input['name'];
 		 $data['email_address'] = $input['email_address'];
 		 $data['status'] = (isset($input['status']) ? $input['status'] : 0);
 		 $data['data_created'] =  date('Y-m-d H:i:s');
@@ -73,6 +74,7 @@ class Common_mdl extends CI_Model {
 		 }		
 		 		
 		 $data['email_address'] = $input['email_address'];
+		 $data['name'] = $input['name'];
 		 $data['status'] = (isset($input['status']) ? $input['status'] : 0);
 		 $data['data_modified'] =  date('Y-m-d H:i:s'); 
 		 $this->db->where('user_id',$user_id);
@@ -154,8 +156,32 @@ class Common_mdl extends CI_Model {
 
 		return $data;
 	}
+	
+	
+	function get_group_class_types() {
+		
+		
+		$this->db->select('*');
+		$this->db->from('package_group_class_types');
+		$this->db->order_by('name');
+		$t = $this->db->get();
+		$data = array();
+		foreach($t->result() as $p)
+		{
+			$data[$p->id] = $p->name;
+		}
+
+		return $data;
+		
+		
+	}
 	 
-	 
+	 function get_all_trainers() {
+		 
+		 
+		 return array(1 => "Loga", 2 => "Nathan");
+		 
+	 }
 
 
 	 

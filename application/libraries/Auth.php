@@ -10,6 +10,7 @@ class Auth {
     	 $this->CI = $CI;
     	 
     	 $this->username = "";
+    	 $this->user_id = "";
     	 $this->email_address = "";
     	 $this->userrole = 0 ;
     	 $this->permissions = array();
@@ -39,6 +40,7 @@ class Auth {
 				{
 					$this->username = $user->username;
 					$this->email_address = $user->email_address;					
+					$this->user_id = $user->user_id;					
 					
 					$this->CI->db->select('*');
 					$this->CI->db->from('user_role_association');

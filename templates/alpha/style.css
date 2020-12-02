@@ -60,3 +60,10 @@ background: #ffff73;
 input[type="checkbox"][readonly] {
   pointer-events: none;
 }
+
+.abl-button
+{
+position: absolute;
+    top: 20px;
+    right: 20px;
+}

@@ -1,15 +1,13 @@
 -- phpMyAdmin SQL Dump
--- version 4.9.2
--- https://www.phpmyadmin.net/
+-- version 4.5.4.1deb2ubuntu2.1
+-- http://www.phpmyadmin.net
 --
--- Host: 127.0.0.1
--- Generation Time: Dec 01, 2020 at 03:35 PM
--- Server version: 10.4.10-MariaDB
--- PHP Version: 7.3.23
+-- Host: localhost
+-- Generation Time: Dec 02, 2020 at 09:46 PM
+-- Server version: 5.6.16-1~exp1
+-- PHP Version: 7.4.4
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET AUTOCOMMIT = 0;
-START TRANSACTION;
 SET time_zone = "+00:00";
 
 
@@ -96,23 +94,33 @@ INSERT INTO `rv_branches_timeslot` (`slot_id`, `branch_id`, `name`, `day`, `star
 -- --------------------------------------------------------
 
 --
--- Table structure for table `rv_employee`
+-- Table structure for table `rv_expenses`
 --
 
-CREATE TABLE `rv_employee` (
-  `employee_id` int(11) NOT NULL,
-  `name` varchar(255) NOT NULL,
-  `email_address` varchar(255) NOT NULL,
-  `phone` varchar(255) NOT NULL,
-  `gender` varchar(100) NOT NULL,
-  `address_line1` varchar(255) NOT NULL,
-  `address_line2` varchar(255) NOT NULL,
-  `city` varchar(255) NOT NULL,
-  `pincode` varchar(255) NOT NULL,
-  `salary` decimal(6,2) NOT NULL,
-  `profile_pic` varchar(255) NOT NULL,
-  `document` varchar(255) NOT NULL
+CREATE TABLE `rv_expenses` (
+  `expense_id` int(11) NOT NULL,
+  `branch_id` varchar(255) NOT NULL,
+  `type` varchar(255) NOT NULL,
+  `date` date NOT NULL,
+  `recipient_name` varchar(1000) NOT NULL,
+  `amount` decimal(6,2) NOT NULL,
+  `description` varchar(1000) NOT NULL,
+  `payment_method` varchar(255) NOT NULL,
+  `is_deleted` int(11) NOT NULL,
+  `created_by` int(11) NOT NULL COMMENT 'user_id',
+  `data_created` datetime NOT NULL,
+  `data_modified` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `rv_expenses`
+--
+
+INSERT INTO `rv_expenses` (`expense_id`, `branch_id`, `type`, `date`, `recipient_name`, `amount`, `description`, `payment_method`, `is_deleted`, `created_by`, `data_created`, `data_modified`) VALUES
+(5, '4', 'sss', '2020-12-19', 'sss', '50.00', 'sssss', 'Paytm', 1, 1, '2020-12-01 18:59:57', '2020-12-01 18:59:57'),
+(6, '4', 'sss', '2020-12-02', 'sssssss', '50.00', 'sssssss', 'Card', 1, 1, '2020-12-01 19:01:13', '2020-12-01 19:30:07'),
+(7, '6', 'ssss', '2020-12-18', 'sss', '50.00', 'sssssss', 'Card', 0, 1, '2020-12-01 20:03:56', '2020-12-01 20:03:56'),
+(8, '6', 'dd', '2020-12-01', 'ddddd', '50.00', 'ddddddd', 'Cash', 0, 1, '2020-12-01 22:33:40', '2020-12-01 22:33:40');
 
 -- --------------------------------------------------------
 
@@ -185,6 +193,109 @@ INSERT INTO `rv_manager` (`manager_id`, `user_id`, `name`, `email_address`, `mob
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `rv_packages`
+--
+
+CREATE TABLE `rv_packages` (
+  `package_id` int(11) NOT NULL,
+  `type` int(11) NOT NULL COMMENT '1 - normal , 2 -group , 3 -personal',
+  `branch_id` int(11) NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `duration` int(11) NOT NULL,
+  `price` decimal(6,2) NOT NULL,
+  `cloase_booking_before` int(11) NOT NULL,
+  `maximum_classes` int(11) NOT NULL,
+  `cancel_policy` int(11) NOT NULL,
+  `status` int(11) NOT NULL,
+  `is_deleted` int(11) NOT NULL,
+  `data_created` datetime NOT NULL,
+  `data_modified` datetime NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `rv_packages`
+--
+
+INSERT INTO `rv_packages` (`package_id`, `type`, `branch_id`, `name`, `duration`, `price`, `cloase_booking_before`, `maximum_classes`, `cancel_policy`, `status`, `is_deleted`, `data_created`, `data_modified`) VALUES
+(1, 1, 4, 'ssssssssss', 15, '2999.00', 0, 0, 0, 1, 1, '2020-11-26 22:04:24', '2020-11-26 22:35:10'),
+(2, 2, 4, 'sss', 12, '155.00', 505, 55, 1, 1, 1, '2020-11-26 23:30:10', '2020-11-26 23:48:44'),
+(3, 2, 4, 'sssssss', 5, '5.00', 5, 5, 1, 1, 0, '2020-11-26 23:53:57', '2020-11-26 23:53:57'),
+(4, 2, 4, 'google.com', 4, '47.00', 2, 6, 1, 1, 0, '2020-11-27 08:15:34', '2020-11-27 08:15:34'),
+(5, 1, 4, 'A ps zone', 5, '55.00', 0, 0, 0, 1, 0, '2020-11-27 08:16:00', '2020-11-27 08:16:00'),
+(6, 1, 4, 'aaaa', 7, '77.00', 0, 0, 0, 1, 0, '2020-11-27 08:16:10', '2020-11-27 08:16:10'),
+(7, 3, 4, 'sssssss', 555, '55.00', 100, 100, 1, 1, 0, '2020-11-27 08:38:20', '2020-11-27 08:43:12');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `rv_package_group_class_types`
+--
+
+CREATE TABLE `rv_package_group_class_types` (
+  `id` int(11) NOT NULL,
+  `name` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `rv_package_group_class_types`
+--
+
+INSERT INTO `rv_package_group_class_types` (`id`, `name`) VALUES
+(1, 'Dance'),
+(2, 'Zumba'),
+(3, 'Kick Boxing'),
+(4, 'Yoga'),
+(5, 'Sky Fitness Slot'),
+(6, 'Sky Fitness'),
+(7, 'Workout');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `rv_package_group_class_types_assoc`
+--
+
+CREATE TABLE `rv_package_group_class_types_assoc` (
+  `package_id` int(11) NOT NULL,
+  `class_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `rv_package_group_class_types_assoc`
+--
+
+INSERT INTO `rv_package_group_class_types_assoc` (`package_id`, `class_id`) VALUES
+(2, 1),
+(2, 2),
+(2, 3),
+(2, 5),
+(2, 6),
+(3, 5),
+(3, 6),
+(4, 5);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `rv_package_pesonal_trainer_assoc`
+--
+
+CREATE TABLE `rv_package_pesonal_trainer_assoc` (
+  `trainer_id` int(11) NOT NULL,
+  `package_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `rv_package_pesonal_trainer_assoc`
+--
+
+INSERT INTO `rv_package_pesonal_trainer_assoc` (`trainer_id`, `package_id`) VALUES
+(1, 7),
+(2, 7);
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `rv_staff`
 --
 
@@ -210,10 +321,10 @@ CREATE TABLE `rv_staff` (
   `discount` varchar(200) NOT NULL,
   `branch_id` int(11) NOT NULL,
   `status` varchar(11) NOT NULL,
-  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
-  `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
-  `is_deleted` int(11) DEFAULT 0
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `is_deleted` int(11) DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -241,8 +352,8 @@ CREATE TABLE `rv_trainer` (
   `profile_pic` varchar(255) DEFAULT NULL,
   `document` varchar(255) DEFAULT NULL,
   `status` varchar(256) NOT NULL,
-  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
-  `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `is_deleted` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -258,6 +369,7 @@ CREATE TABLE `rv_user` (
   `username` varchar(255) NOT NULL,
   `password` varchar(255) NOT NULL COMMENT 'MD5 hash',
   `email_address` varchar(255) NOT NULL,
+  `name` varchar(255) NOT NULL,
   `status` int(11) NOT NULL,
   `is_deleted` int(11) NOT NULL,
   `data_created` datetime NOT NULL,
@@ -268,34 +380,34 @@ CREATE TABLE `rv_user` (
 -- Dumping data for table `rv_user`
 --
 
-INSERT INTO `rv_user` (`user_id`, `branch_id`, `username`, `password`, `email_address`, `status`, `is_deleted`, `data_created`, `data_modified`) VALUES
-(1, 0, 'admin', '21232f297a57a5a743894a0e4a801fc3', 'admin@admin.com', 1, 0, '2020-11-18 00:00:00', '2020-11-18 00:00:00'),
-(4, 4, 'fesdgefgfg', '3c1d4baa14ad36f3e5bfb6598caa3995', 'ad1234@dd.ddd', 0, 0, '2020-11-23 20:47:06', '2020-11-23 20:47:06'),
-(5, 5, 'sssssss69518545', '16fcb1091f8a0cc70c96e2ff97fdd213', 'ss@dd.ddd', 0, 0, '2020-11-23 20:53:30', '2020-11-23 20:53:30'),
-(6, 5, 'sssssss61316607', '16fcb1091f8a0cc70c96e2ff97fdd213', 'ss@dd.ddd', 0, 0, '2020-11-23 20:53:37', '2020-11-23 20:53:37'),
-(7, 5, 'sssssss69631330', '16fcb1091f8a0cc70c96e2ff97fdd213', 'ss@dd.ddd', 0, 0, '2020-11-23 20:54:22', '2020-11-23 20:54:22'),
-(8, 5, 'sssssss83302853', '16fcb1091f8a0cc70c96e2ff97fdd213', 'ss@dd.ddd', 0, 0, '2020-11-23 20:55:54', '2020-11-23 20:55:54'),
-(9, 5, 'sssssss27205821', '16fcb1091f8a0cc70c96e2ff97fdd213', 'ss@dd.ddd', 0, 0, '2020-11-23 20:57:00', '2020-11-23 20:57:00'),
-(10, 5, 'sssssss96982462', '16fcb1091f8a0cc70c96e2ff97fdd213', 'ss@dd.ddd', 0, 0, '2020-11-23 20:57:20', '2020-11-23 20:57:20'),
-(11, 5, 'sssssss58001179', '16fcb1091f8a0cc70c96e2ff97fdd213', 'ss@dd.ddd', 0, 0, '2020-11-23 20:58:51', '2020-11-23 20:58:51'),
-(12, 5, 'sssssss', '16fcb1091f8a0cc70c96e2ff97fdd213', 'ss@dd.ddd', 0, 0, '2020-11-23 20:59:17', '2020-11-23 20:59:17'),
-(13, 5, 'admin257', '16fcb1091f8a0cc70c96e2ff97fdd213', 'ad1234@dd.ddd', 0, 0, '2020-11-23 21:03:15', '2020-11-23 21:03:15'),
-(14, 5, 'admin413', '16fcb1091f8a0cc70c96e2ff97fdd213', 'ad1234@dd.ddd', 0, 0, '2020-11-23 21:03:19', '2020-11-23 21:03:19'),
-(15, 5, 'admin818', '16fcb1091f8a0cc70c96e2ff97fdd213', 'ad1234@dd.ddd', 0, 0, '2020-11-23 21:03:33', '2020-11-23 21:03:33'),
-(16, 5, 'admin445', '16fcb1091f8a0cc70c96e2ff97fdd213', 'ad1234@dd.ddd', 0, 0, '2020-11-23 21:06:07', '2020-11-23 21:06:07'),
-(17, 5, 'admin214', '16fcb1091f8a0cc70c96e2ff97fdd213', 'ad1234@dd.ddd', 0, 0, '2020-11-23 21:06:25', '2020-11-23 21:06:25'),
-(18, 5, 'ssssss', '2d02e669731cbade6a64b58d602cf2a4', 'ass@ddd.ddd', 0, 0, '2020-11-23 21:45:59', '2020-11-23 21:45:59'),
-(19, 5, 'sssssssssss', 'b330cf2425c6ac1561c63f825e680a53', 'ass@ddd.ddd', 0, 0, '2020-11-23 21:46:51', '2020-11-23 21:46:51'),
-(20, 5, 'srrrrrr', '338d811d532553557ca33be45b6bde55', 'ass@ddd.ddd', 0, 0, '2020-11-23 21:47:23', '2020-11-23 21:47:23'),
-(21, 5, 'ssssssssssew', '338d811d532553557ca33be45b6bde55', 'ad1234@dd.ddd', 1, 0, '2020-11-23 21:48:37', '2020-11-24 22:17:27'),
-(22, 4, 'sssss', '2d02e669731cbade6a64b58d602cf2a4', 'ad1234@dd.ddd', 0, 1, '2020-11-24 19:31:33', '2020-11-24 19:31:33'),
-(23, 4, 'adminssss', 'a03fd6e43c16b44429d829dffa31321a', 'ad1234@dd.ddd', 0, 1, '2020-11-24 19:48:13', '2020-11-24 19:48:13'),
-(24, 4, 'a', '8f60c8102d29fcd525162d02eed4566b', 'ad1234@dd.ddd', 0, 1, '2020-11-24 20:10:19', '2020-11-24 20:10:19'),
-(25, 4, 'asssss', '033c91317f9b6795106a825cf8ef773d', 'ad1234@dd.ddd', 0, 1, '2020-11-24 20:10:39', '2020-11-24 20:10:39'),
-(26, 4, 'adminsss', 'a03fd6e43c16b44429d829dffa31321a', 'ad1234@dd.ddd', 0, 1, '2020-11-24 20:16:27', '2020-11-24 20:16:27'),
-(27, 5, 'adminssssss', '033c91317f9b6795106a825cf8ef773d', 'ad1234@dd.dddsssssss', 1, 0, '2020-11-24 20:31:55', '2020-11-24 22:13:14'),
-(28, 5, 'adminssssssss', 'b330cf2425c6ac1561c63f825e680a53', 'ad1234@dd.ddd', 1, 0, '2020-11-24 20:37:15', '2020-11-24 20:37:15'),
-(29, 4, 'admins', '16fcb1091f8a0cc70c96e2ff97fdd213', 'ad1234@dd.ddd', 1, 0, '2020-11-24 22:26:36', '2020-11-24 22:26:36');
+INSERT INTO `rv_user` (`user_id`, `branch_id`, `username`, `password`, `email_address`, `name`, `status`, `is_deleted`, `data_created`, `data_modified`) VALUES
+(1, 0, 'admin', '21232f297a57a5a743894a0e4a801fc3', 'admin@admin.com', 'Admin', 1, 0, '2020-11-18 00:00:00', '2020-11-18 00:00:00'),
+(4, 4, 'fesdgefgfg', '3c1d4baa14ad36f3e5bfb6598caa3995', 'ad1234@dd.ddd', '', 0, 0, '2020-11-23 20:47:06', '2020-11-23 20:47:06'),
+(5, 5, 'sssssss69518545', '16fcb1091f8a0cc70c96e2ff97fdd213', 'ss@dd.ddd', '', 0, 0, '2020-11-23 20:53:30', '2020-11-23 20:53:30'),
+(6, 5, 'sssssss61316607', '16fcb1091f8a0cc70c96e2ff97fdd213', 'ss@dd.ddd', '', 0, 0, '2020-11-23 20:53:37', '2020-11-23 20:53:37'),
+(7, 5, 'sssssss69631330', '16fcb1091f8a0cc70c96e2ff97fdd213', 'ss@dd.ddd', '', 0, 0, '2020-11-23 20:54:22', '2020-11-23 20:54:22'),
+(8, 5, 'sssssss83302853', '16fcb1091f8a0cc70c96e2ff97fdd213', 'ss@dd.ddd', '', 0, 0, '2020-11-23 20:55:54', '2020-11-23 20:55:54'),
+(9, 5, 'sssssss27205821', '16fcb1091f8a0cc70c96e2ff97fdd213', 'ss@dd.ddd', '', 0, 0, '2020-11-23 20:57:00', '2020-11-23 20:57:00'),
+(10, 5, 'sssssss96982462', '16fcb1091f8a0cc70c96e2ff97fdd213', 'ss@dd.ddd', '', 0, 0, '2020-11-23 20:57:20', '2020-11-23 20:57:20'),
+(11, 5, 'sssssss58001179', '16fcb1091f8a0cc70c96e2ff97fdd213', 'ss@dd.ddd', '', 0, 0, '2020-11-23 20:58:51', '2020-11-23 20:58:51'),
+(12, 5, 'sssssss', '16fcb1091f8a0cc70c96e2ff97fdd213', 'ss@dd.ddd', '', 0, 0, '2020-11-23 20:59:17', '2020-11-23 20:59:17'),
+(13, 5, 'admin257', '16fcb1091f8a0cc70c96e2ff97fdd213', 'ad1234@dd.ddd', '', 0, 0, '2020-11-23 21:03:15', '2020-11-23 21:03:15'),
+(14, 5, 'admin413', '16fcb1091f8a0cc70c96e2ff97fdd213', 'ad1234@dd.ddd', '', 0, 0, '2020-11-23 21:03:19', '2020-11-23 21:03:19'),
+(15, 5, 'admin818', '16fcb1091f8a0cc70c96e2ff97fdd213', 'ad1234@dd.ddd', '', 0, 0, '2020-11-23 21:03:33', '2020-11-23 21:03:33'),
+(16, 5, 'admin445', '16fcb1091f8a0cc70c96e2ff97fdd213', 'ad1234@dd.ddd', '', 0, 0, '2020-11-23 21:06:07', '2020-11-23 21:06:07'),
+(17, 5, 'admin214', '16fcb1091f8a0cc70c96e2ff97fdd213', 'ad1234@dd.ddd', '', 0, 0, '2020-11-23 21:06:25', '2020-11-23 21:06:25'),
+(18, 5, 'ssssss', '2d02e669731cbade6a64b58d602cf2a4', 'ass@ddd.ddd', '', 0, 0, '2020-11-23 21:45:59', '2020-11-23 21:45:59'),
+(19, 5, 'sssssssssss', 'b330cf2425c6ac1561c63f825e680a53', 'ass@ddd.ddd', '', 0, 0, '2020-11-23 21:46:51', '2020-11-23 21:46:51'),
+(20, 5, 'srrrrrr', '338d811d532553557ca33be45b6bde55', 'ass@ddd.ddd', '', 0, 0, '2020-11-23 21:47:23', '2020-11-23 21:47:23'),
+(21, 5, 'ssssssssssew', '338d811d532553557ca33be45b6bde55', 'ad1234@dd.ddd', '', 1, 0, '2020-11-23 21:48:37', '2020-11-24 22:17:27'),
+(22, 4, 'sssss', '2d02e669731cbade6a64b58d602cf2a4', 'ad1234@dd.ddd', '', 0, 1, '2020-11-24 19:31:33', '2020-11-24 19:31:33'),
+(23, 4, 'adminssss', 'a03fd6e43c16b44429d829dffa31321a', 'ad1234@dd.ddd', '', 0, 1, '2020-11-24 19:48:13', '2020-11-24 19:48:13'),
+(24, 4, 'a', '8f60c8102d29fcd525162d02eed4566b', 'ad1234@dd.ddd', '', 0, 1, '2020-11-24 20:10:19', '2020-11-24 20:10:19'),
+(25, 4, 'asssss', '033c91317f9b6795106a825cf8ef773d', 'ad1234@dd.ddd', '', 0, 1, '2020-11-24 20:10:39', '2020-11-24 20:10:39'),
+(26, 4, 'adminsss', 'a03fd6e43c16b44429d829dffa31321a', 'ad1234@dd.ddd', '', 0, 1, '2020-11-24 20:16:27', '2020-11-24 20:16:27'),
+(27, 5, 'adminssssss', '033c91317f9b6795106a825cf8ef773d', 'ad1234@dd.dddsssssss', '', 1, 0, '2020-11-24 20:31:55', '2020-11-24 22:13:14'),
+(28, 5, 'adminssssssss', 'b330cf2425c6ac1561c63f825e680a53', 'ad1234@dd.ddd', '', 1, 0, '2020-11-24 20:37:15', '2020-11-24 20:37:15'),
+(29, 4, 'admins', '16fcb1091f8a0cc70c96e2ff97fdd213', 'ad1234@dd.ddd', '', 1, 0, '2020-11-24 22:26:36', '2020-11-24 22:26:36');
 
 -- --------------------------------------------------------
 
@@ -453,10 +565,10 @@ ALTER TABLE `rv_branches_timeslot`
   ADD PRIMARY KEY (`slot_id`);
 
 --
--- Indexes for table `rv_employee`
+-- Indexes for table `rv_expenses`
 --
-ALTER TABLE `rv_employee`
-  ADD PRIMARY KEY (`employee_id`);
+ALTER TABLE `rv_expenses`
+  ADD PRIMARY KEY (`expense_id`);
 
 --
 -- Indexes for table `rv_log`
@@ -477,16 +589,28 @@ ALTER TABLE `rv_manager`
   ADD PRIMARY KEY (`manager_id`);
 
 --
--- Indexes for table `rv_staff`
+-- Indexes for table `rv_packages`
 --
-ALTER TABLE `rv_staff`
-  ADD PRIMARY KEY (`staff_id`);
+ALTER TABLE `rv_packages`
+  ADD PRIMARY KEY (`package_id`);
 
 --
--- Indexes for table `rv_trainer`
+-- Indexes for table `rv_package_group_class_types`
 --
-ALTER TABLE `rv_trainer`
-  ADD PRIMARY KEY (`trainer_id`);
+ALTER TABLE `rv_package_group_class_types`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `rv_package_group_class_types_assoc`
+--
+ALTER TABLE `rv_package_group_class_types_assoc`
+  ADD PRIMARY KEY (`package_id`,`class_id`);
+
+--
+-- Indexes for table `rv_package_pesonal_trainer_assoc`
+--
+ALTER TABLE `rv_package_pesonal_trainer_assoc`
+  ADD PRIMARY KEY (`trainer_id`,`package_id`);
 
 --
 -- Indexes for table `rv_user`
@@ -521,56 +645,46 @@ ALTER TABLE `rv_user_role_association`
 --
 ALTER TABLE `rv_branches`
   MODIFY `branch_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
-
 --
 -- AUTO_INCREMENT for table `rv_branches_timeslot`
 --
 ALTER TABLE `rv_branches_timeslot`
   MODIFY `slot_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
-
 --
--- AUTO_INCREMENT for table `rv_employee`
+-- AUTO_INCREMENT for table `rv_expenses`
 --
-ALTER TABLE `rv_employee`
-  MODIFY `employee_id` int(11) NOT NULL AUTO_INCREMENT;
-
+ALTER TABLE `rv_expenses`
+  MODIFY `expense_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 --
 -- AUTO_INCREMENT for table `rv_log`
 --
 ALTER TABLE `rv_log`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
-
 --
 -- AUTO_INCREMENT for table `rv_log_login`
 --
 ALTER TABLE `rv_log_login`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
-
 --
 -- AUTO_INCREMENT for table `rv_manager`
 --
 ALTER TABLE `rv_manager`
   MODIFY `manager_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
-
 --
--- AUTO_INCREMENT for table `rv_staff`
+-- AUTO_INCREMENT for table `rv_packages`
 --
-ALTER TABLE `rv_staff`
-  MODIFY `staff_id` int(11) NOT NULL AUTO_INCREMENT;
-
+ALTER TABLE `rv_packages`
+  MODIFY `package_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 --
--- AUTO_INCREMENT for table `rv_trainer`
+-- AUTO_INCREMENT for table `rv_package_group_class_types`
 --
-ALTER TABLE `rv_trainer`
-  MODIFY `trainer_id` int(11) NOT NULL AUTO_INCREMENT;
-
+ALTER TABLE `rv_package_group_class_types`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 --
 -- AUTO_INCREMENT for table `rv_user`
 --
 ALTER TABLE `rv_user`
   MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
-COMMIT;
-
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

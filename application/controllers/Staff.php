@@ -41,6 +41,8 @@ function __construct() {
 		$data['pagetitle'] = 'Staff';
 		$data['path'] = 'staff/staff';
 		$data['plugins']['datatable'] = 1 ;
+		$data['condition']['brach_select'] = 1 ;
+
 		$this->template->load_template($data);
 	}
 
@@ -88,6 +90,8 @@ function __construct() {
 		$data['path'] = 'staff/staff_add';
 		$data['plugins']['jQueryValidate'] = 1 ;
 		$data['plugins']['switchButton'] = 1 ;
+		$data['condition']['brach_select'] = 1 ;
+
 		$this->template->load_template($data);
 	}
 	
@@ -142,6 +146,8 @@ function __construct() {
 		$data['path'] = 'staff/staff_edit';
 		$data['plugins']['jQueryValidate'] = 1 ;
 		$data['plugins']['switchButton'] = 1 ;
+		$data['condition']['brach_select'] = 1 ;
+
 		$data['staff_details'] = $staff_details;
 		$this->template->load_template($data);
 	}

@@ -9,6 +9,7 @@ class Template {
 	 public function __construct(){
     	 $this->template = "alpha";
     	 $this->language = "english";
+    	 $this->price_type = "$";
     	 $this->customJS = "";
     	 $this->customJSArr = array();
     	 
@@ -26,7 +27,9 @@ class Template {
 		// $template_type = 1  Normal Menu
 		// $template_type = 2  Login
 		
-		$this->CI->load->view($this->template.'/header',$data);
+		if(!isset($data['sub_pagename'])) { $data['sub_pagename'] = ''; }
+		
+		 $this->CI->load->view($this->template.'/header',$data);
 
 		if($template_type == 2 ) {
 			
@@ -165,6 +168,14 @@ class Template {
 		}
 		
 	}
+	
+	function price($price,$limit=2) {
+		
+		return  $this->price_type.' '.number_format($price,$limit);
+		
+	}
+	
+	
 	
 	
 	

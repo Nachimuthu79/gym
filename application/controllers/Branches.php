@@ -36,15 +36,18 @@ function __construct() {
 			$this->branch_mdl->branch_listing();
 			exit;	
 		}
-
+		
+		
 		$data['pagename'] = 'branch';
 		$data['pagetitle'] = 'Branches';
 		$data['path'] = 'branches/branches';
-		$data['plugins']['datatable'] = 1 ;
+		$data['plugins']['datatable'] = 1 ; 
 		
 		$this->template->load_template($data);
 		 
 	}
+	
+	
 	
 	function add()
 	{

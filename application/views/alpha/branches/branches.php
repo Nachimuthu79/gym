@@ -43,6 +43,8 @@ $js = <<<EOD
   
    $('#table').DataTable( {
         "processing": true,
+         "aoColumnDefs": [
+        { "bSortable": false, "aTargets": [ 2,3 ] }    ],
         "serverSide": true,
         "ajax": ""
     } );

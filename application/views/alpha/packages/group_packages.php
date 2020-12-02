@@ -1,9 +1,9 @@
 	  
             <div class="card">
               <div class="card-header">
-                <h3 class="card-title ebin-tile">Managers</h3> 
+                <h3 class="card-title ebin-tile">Group Class Packages</h3>
                 
-                <a href="<?php echo site_url('managers/add') ?>"><button type="button" class="adn-btn ripple">Add New Manager</button></a>
+                <a href="<?php echo site_url('packages/add/group') ?>"><button type="button" class="adn-btn ripple">Add Group Class Package</button></a>
               </div>
               <!-- /.card-header -->
               <div class="card-body">
@@ -11,10 +11,10 @@
                   <thead>
                   <tr>
                     <th>Name</th>
-                    <th>Username</th> 
-                    <th>Last Login</th>
-                    <th>Created</th>
-                    <th>Status</th>
+                    <th>Validity</th> 
+                    <th>Price</th>
+                    <th>Max. Class</th>
+                    <th>Status</th> 
                     <th>Actions</th>
                   
                   </tr>
@@ -46,7 +46,7 @@ $js = <<<EOD
    $('#table').DataTable( {
         "processing": true,
         "aoColumnDefs": [
-        { "bSortable": false, "aTargets": [ 2,3,4,5 ] }    ],
+        { "bSortable": false, "aTargets": [ 3,4,5 ] }    ],
         "serverSide": true,
         "ajax": ""
     } );
