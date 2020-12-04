@@ -4,31 +4,33 @@ class Staff_mdl extends CI_Model {
 	
 	
 	function add_staff() {
-		
-		$data = array();
-		$input = $this->input->post();
-		$data['name'] =$input['name'];
-		$data['email_address'] =$input['email_address'];
-		$data['username'] =$input['username'];
-		$data['password'] =$input['password'];
-		$data['employee_type'] =$input['employee_type'];
-		$data['dob'] =$input['dob'];
-		$data['gender'] =$input['gender'];
-        $data['phone'] =$input['phone'];
-        $data['monthly_salary'] = $input['monthly_salary'];
-        $data['sales_target'] =$input['sales_target'];
-        $data['monthly_target'] =$input['monthly_target'];
-        $data['daily_target'] =$input['daily_target'];
-		$data['address_line1'] =$input['address_line1'];
-		$data['address_line2'] =$input['address_line2'];
-		$data['city'] =$input['city'];
-		$data['discount'] = $input['discount'];
-		$data['branch_id'] = $this->auth->active_branch;
-		$data['status'] = isset($input['status']) ? $input['status'] : 0;
-		
-		$this->db->insert('staff',$data);
-		$staff_id = $this->db->insert_id();
-		return $staff_id;
+        $user_id = $this->common_mdl->adduser(4);
+        if($user_id) {
+            $data = array();
+            $input = $this->input->post();
+            $data['user_id'] = $user_id;
+            $data['name'] = $input['name'];
+            $data['email_address'] = $input['email_address'];
+            $data['username'] = $input['username'];
+            $data['employee_type'] = $input['employee_type'];
+            $data['dob'] = $input['dob'];
+            $data['gender'] = $input['gender'];
+            $data['phone'] = $input['phone'];
+            $data['monthly_salary'] = $input['monthly_salary'];
+            $data['sales_target'] = $input['sales_target'];
+            $data['monthly_target'] = $input['monthly_target'];
+            $data['daily_target'] = $input['daily_target'];
+            $data['address_line1'] = $input['address_line1'];
+            $data['address_line2'] = $input['address_line2'];
+            $data['city'] = $input['city'];
+            $data['discount'] = $input['discount'];
+            $data['branch_id'] = $this->auth->active_branch;
+            $data['status'] = isset($input['status']) ? $input['status'] : 0;
+
+            $this->db->insert('staff', $data);
+            $staff_id = $this->db->insert_id();
+            return $staff_id;
+        }
 	}
 
     function update_files($update_id, $file, $column_name)

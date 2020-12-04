@@ -67,3 +67,11 @@ position: absolute;
     top: 20px;
     right: 20px;
 }
+
+/*datepicker*/
+.datepicker {
+    padding: 23px !important;
+}
+.datepicker .table-condensed {
+    line-height: 32px;
+}

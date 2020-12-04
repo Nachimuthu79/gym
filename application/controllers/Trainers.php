@@ -92,17 +92,14 @@ function __construct() {
 		$data['path'] = 'trainers/trainers_add';
 		$data['plugins']['jQueryValidate'] = 1 ;
 		$data['plugins']['switchButton'] = 1 ;
+		$data['plugins']['datepicker'] = 1 ;
 		$data['condition']['brach_select'] = 1 ;
-
-
 		$this->template->load_template($data);
-		
 	}
 	
 	function edit($trainer_id)
 	{
 		$this->auth->has_PagePermission('trainer');
-
         $trainer_details = $this->trainer_mdl->get_trainer($trainer_id);
 		if(!$trainer_details) {
 			
@@ -112,9 +109,11 @@ function __construct() {
 		if($this->input->post())
 		{
 			$branch_id = $this->trainer_mdl->edit_trainer($trainer_id);
+            $this->common_mdl->edit_user($trainer_details['user_id']);
 			
 			if($branch_id) {
                 if (isset($_FILES['document']) && !empty($_FILES['document']['name'])) {
+                    unlink(FCPATH. "images/document/".$trainer_details['document']);
                     $fileInfo = pathinfo($_FILES['document']['name']);
                     $img_name = rand() . '.' . $fileInfo['extension'];
                     $ImageName = $img_name;
@@ -126,6 +125,7 @@ function __construct() {
                     $this->trainer_mdl->update_files($trainer_id, $file_name, $column_name);
                 }
                 if (isset($_FILES['profile_pic']) && !empty($_FILES['profile_pic']['name'])) {
+                    unlink(FCPATH. "images/profile_picture/".$trainer_details['profile_pic']);
                     $fileInfo = pathinfo($_FILES['profile_pic']['name']);
                     $img_name = rand() . '.' . $fileInfo['extension'];
                     $ImageName = $img_name;
@@ -142,7 +142,7 @@ function __construct() {
 			}
 			else
 			{
-				$this->template->notification('warning','Unable to Create the Branch');
+				$this->template->notification('warning','Unable to Update the Trainer');
 				$this->template->redirect('trainers');
 			}
 		}

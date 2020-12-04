@@ -42,18 +42,24 @@
                                     <div class="form-group">
                                         <label for="name">Username</label>
                                         <input type="text" name="username" class="form-control" id="username"
-                                               value="<?php  echo $staff_details['username']; ?>" placeholder="Enter user Name">
+                                               value="<?php  echo $staff_details['username']; ?>" placeholder="Enter user Name" readonly>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="dob">DOB</label>
-                                        <input type="date" name="dob" class="form-control" id="dob"
+                                        <input type="text" name="dob" class="form-control" id="datepicker"
                                                value="<?php  echo $staff_details['dob']; ?>" placeholder="Enter date of birth">
                                     </div>
                                 </div>
                             </div>
                             <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="email">Password</label>
+                                        <input type="password" name="password" class="form-control" id="password" placeholder="Enter password">
+                                    </div>
+                                </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="name">Type of employee</label>
@@ -65,6 +71,8 @@
                                         </select>
                                     </div>
                                 </div>
+                            </div>
+                            <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="dob">Gender</label>
@@ -80,8 +88,6 @@
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="phone">Phone Number</label>
@@ -89,6 +95,8 @@
                                                value="<?php  echo $staff_details['phone']; ?>" placeholder="Enter Phone">
                                     </div>
                                 </div>
+                            </div>
+                            <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="address_line1">Address Line 1</label>
@@ -96,8 +104,6 @@
                                                value="<?php  echo $staff_details['address_line1']; ?>" placeholder="Enter Address Line 1">
                                     </div>
                                 </div>
-                            </div>
-                            <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="address_line2">Address Line 2</label>
@@ -105,6 +111,8 @@
                                                value="<?php  echo $staff_details['address_line2']; ?>" placeholder="Enter Address Line 2">
                                     </div>
                                 </div>
+                            </div>
+                            <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="city">City</label>
@@ -112,8 +120,6 @@
                                                value="<?php  echo $staff_details['city']; ?>" placeholder="Enter City">
                                     </div>
                                 </div>
-                            </div>
-                            <div class="row">
                                 <div class="col-md-3">
                                     <div class="form-group">
                                         <label for="exampleInputFile">Document</label>
@@ -143,6 +149,8 @@
                                         </div>
                                     </div>
                                 </div>
+                            </div>
+                            <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="monthly_salary">Monthly Salary</label>
@@ -150,26 +158,26 @@
                                                value="<?php  echo $staff_details['monthly_salary']; ?>" placeholder="Enter monthly salary">
                                     </div>
                                 </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-4">
+                                <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="sales_target">Annual Sales Target</label>
                                         <input type="text" name="sales_target" class="form-control" id="sales_target"
                                                value="<?php  echo $staff_details['sales_target']; ?>" placeholder="Enter sales target">
                                     </div>
                                 </div>
-                                <div class="col-md-4">
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="monthly_target">Monthly target</label>
                                         <input type="text" name="monthly_target" class="form-control" id="monthly_target"
                                                value="<?php  echo $staff_details['monthly_target']; ?>" placeholder="Enter monthly target">
                                     </div>
                                 </div>
-                                <div class="col-md-4">
+                                <div class="col-md-6">
                                     <div class="form-group">
-                                        <label for="daily_target">Daily_target</label>
-                                        <input type="password" name="daily_target" class="form-control"
+                                        <label for="daily_target">Daily target</label>
+                                        <input type="text" name="daily_target" class="form-control"
                                                value="<?php  echo $staff_details['daily_target']; ?>" id="daily_target" placeholder="Enter daily target">
                                     </div>
                                 </div>
@@ -217,7 +225,7 @@
                 </div>
                 <!-- /.card-body -->
                 <div class="card-footer text-right">
-                    <button type="submit" class="btn btn-primary ripple">Add New Staff</button>
+                    <button type="submit" class="btn btn-primary ripple"><?php echo ($staff_details['staff_id']) ? 'Update Staff' : 'Add New Staff'; ?></button>
                 </div>
                 </form>
             </div>
@@ -259,12 +267,50 @@ $(document).ready(function () {
       name: {
         required: true,
       },
+       email_address: {
+        required: true,
+      },
+       username: {
+        required: true,
+        minlength : 5
+      },
+       employee_type: {
+        required: true,
+      },
+       password: {
+        minlength : 5
+      },
+       dob: {
+        required: true,
+      },
+       gender: {
+        required: true,
+      },
+       phone: {
+        required: true,
+      },
+       monthly_salary: {
+        required: true,
+        number:true
+      },    
+       sales_target: {
+        required: true,
+      },
+       monthly_target: {
+        required: true,
+      },
+       daily_target: {
+        required: true,
+      },
+      discount: {
+        required: true,
+      },
       address_line1: {
         required: true,
       },
       address_line2: {
         required: true,
-      },    
+      }, 
       city: {
         required: true,
       }
@@ -274,9 +320,6 @@ $(document).ready(function () {
         required: "Please enter a email address",
         email: "Please enter a vaild email address"
       },
-      password: {
-        required: "Please enter a name",
-      }
     },
     errorElement: 'span',
     errorPlacement: function (error, element) {
@@ -294,7 +337,12 @@ $(document).ready(function () {
   $("input[data-bootstrap-switch]").each(function(){
       $(this).bootstrapSwitch('state', $(this).prop('checked'));
     });
-    
+  
+    //Date picker
+    $('#datepicker').datepicker({
+        endDate: '+0d',
+        autoclose: true
+    })
 });
 
 

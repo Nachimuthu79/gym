@@ -34,6 +34,9 @@ if(isset($plugins) && is_array($plugins) ) {
 			if($pluginname == "daterangepicker") {
 			$css[] = array('plugins/daterangepicker/daterangepicker.css'); 
 			}
+            if($pluginname == "datepicker") {
+                $css[] = array('plugins/bootstrap-datepicker/bootstrap-datepicker.min.css');
+            }
 			
 			
 		}

@@ -1,13 +1,15 @@
 -- phpMyAdmin SQL Dump
--- version 4.5.4.1deb2ubuntu2.1
--- http://www.phpmyadmin.net
+-- version 4.9.2
+-- https://www.phpmyadmin.net/
 --
--- Host: localhost
--- Generation Time: Dec 02, 2020 at 09:46 PM
--- Server version: 5.6.16-1~exp1
--- PHP Version: 7.4.4
+-- Host: 127.0.0.1
+-- Generation Time: Dec 04, 2020 at 04:15 AM
+-- Server version: 10.4.10-MariaDB
+-- PHP Version: 7.3.23
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT = 0;
+START TRANSACTION;
 SET time_zone = "+00:00";
 
 
@@ -188,7 +190,8 @@ INSERT INTO `rv_manager` (`manager_id`, `user_id`, `name`, `email_address`, `mob
 (8, 26, 'sssssss', 'ad1234@dd.ddd', '08745693215', '', 'sss', 'ss', 'Kundadam', '638702', '0.00', '', '', '2020-11-24 20:16:27', '2020-11-24 20:16:27'),
 (9, 27, 'ssssssss', 'ad1234@dd.dddsssssss', '08745693215', '', 'ssssssssssss', 'ss', 'Kundadam', '638702', '0.00', '', '', '2020-11-24 20:31:55', '2020-11-24 22:13:14'),
 (10, 28, 'sssssss', 'ad1234@dd.ddd', '08745693215', '', 'sss', 'ss', 'Kundadam', '638702', '0.00', '', '', '2020-11-24 20:37:15', '2020-11-24 20:37:15'),
-(11, 29, 'sssssss', 'ad1234@dd.ddd', '08745693215', '', 'sss', 'ss', 'Kundadam', '638702', '0.00', '', '', '2020-11-24 22:26:36', '2020-11-24 22:26:36');
+(11, 29, 'sssssss', 'ad1234@dd.ddd', '08745693215', '', 'sss', 'ss', 'Kundadam', '638702', '0.00', '', '', '2020-11-24 22:26:36', '2020-11-24 22:26:36'),
+(12, 30, 'nachi', 'nachimuthu12@gmail.com', '9894515387', '', 'Kungumam palayam', 'dwqdqw', 'Batu Pahat', '1234', '0.00', '', '', '2020-12-03 03:05:16', '2020-12-03 03:05:16');
 
 -- --------------------------------------------------------
 
@@ -301,10 +304,10 @@ INSERT INTO `rv_package_pesonal_trainer_assoc` (`trainer_id`, `package_id`) VALU
 
 CREATE TABLE `rv_staff` (
   `staff_id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
   `name` varchar(256) NOT NULL,
   `email_address` varchar(256) NOT NULL,
   `username` varchar(256) NOT NULL,
-  `password` varchar(256) NOT NULL,
   `employee_type` int(10) NOT NULL,
   `dob` varchar(256) NOT NULL,
   `gender` int(11) NOT NULL,
@@ -321,10 +324,18 @@ CREATE TABLE `rv_staff` (
   `discount` varchar(200) NOT NULL,
   `branch_id` int(11) NOT NULL,
   `status` varchar(11) NOT NULL,
-  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  `is_deleted` int(11) DEFAULT '0'
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  `is_deleted` int(11) DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `rv_staff`
+--
+
+INSERT INTO `rv_staff` (`staff_id`, `user_id`, `name`, `email_address`, `username`, `employee_type`, `dob`, `gender`, `phone`, `monthly_salary`, `sales_target`, `monthly_target`, `daily_target`, `address_line1`, `address_line2`, `city`, `document`, `profile_pic`, `discount`, `branch_id`, `status`, `created_at`, `updated_at`, `is_deleted`) VALUES
+(1, 0, 'nachi', 'nachi@gmail.com', 'nachimuthustaff', 1, '23/09/2020', 2, '9887665555', '333', 'asdsad', 'sdfds', 'dsfsd', 'wrwqr', 'wqrwqrwr', 'qwrqwr', '449740244.jpg', '513128725.jpg', 'sadasd', 4, '1', '2020-12-03 15:14:53', '2020-12-03 15:29:28', 0),
+(2, 38, 'test', 'test@GMAIL.COM', 'testing', 2, '12/01/2020', 1, '123333', '324324', 'asd', '324', 'sadffd', 'sdfdsf', 'sdfds', 'sdf', '2063308900.jpg', '1445347687.jpg', 'fsdf', 4, '1', '2020-12-04 03:04:56', '2020-12-04 03:04:56', 0);
 
 -- --------------------------------------------------------
 
@@ -334,10 +345,10 @@ CREATE TABLE `rv_staff` (
 
 CREATE TABLE `rv_trainer` (
   `trainer_id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
   `name` varchar(255) NOT NULL,
   `email_address` varchar(255) NOT NULL,
   `username` varchar(255) NOT NULL,
-  `password` varchar(255) NOT NULL,
   `dob` varchar(250) NOT NULL,
   `phone` varchar(255) NOT NULL,
   `gender` varchar(100) NOT NULL,
@@ -352,10 +363,18 @@ CREATE TABLE `rv_trainer` (
   `profile_pic` varchar(255) DEFAULT NULL,
   `document` varchar(255) DEFAULT NULL,
   `status` varchar(256) NOT NULL,
-  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   `is_deleted` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `rv_trainer`
+--
+
+INSERT INTO `rv_trainer` (`trainer_id`, `user_id`, `name`, `email_address`, `username`, `dob`, `phone`, `gender`, `monthly_salary`, `training_commision`, `sales_target`, `daily_target`, `monthly_target`, `address_line1`, `address_line2`, `city`, `profile_pic`, `document`, `status`, `created_at`, `updated_at`, `is_deleted`) VALUES
+(1, 35, 'nachi', 'nachimuthu@gmail.com', 'nachimuthu', '2020-12-05', '1234567890', '2', '123456', 'asdsa', 'zsdad', 'asdad', 'asdsa', '1234567xsc', 'asdad', '', '612758463.jpg', '873462670.jpg', '1', '2020-12-03 14:38:50', '2020-12-03 15:46:43', 0),
+(2, 37, 'test', 'test@gmail.com', 'test', '12/02/2020', '8763534', '2', '123456', 'dsf', 'xvd', 'dvffd', 'dvd', 'zxfcs', 'sfdsd', '', '254115818.jpg', '970053557.jpg', '1', '2020-12-04 03:02:42', '2020-12-04 03:02:42', 0);
 
 -- --------------------------------------------------------
 
@@ -407,7 +426,12 @@ INSERT INTO `rv_user` (`user_id`, `branch_id`, `username`, `password`, `email_ad
 (26, 4, 'adminsss', 'a03fd6e43c16b44429d829dffa31321a', 'ad1234@dd.ddd', '', 0, 1, '2020-11-24 20:16:27', '2020-11-24 20:16:27'),
 (27, 5, 'adminssssss', '033c91317f9b6795106a825cf8ef773d', 'ad1234@dd.dddsssssss', '', 1, 0, '2020-11-24 20:31:55', '2020-11-24 22:13:14'),
 (28, 5, 'adminssssssss', 'b330cf2425c6ac1561c63f825e680a53', 'ad1234@dd.ddd', '', 1, 0, '2020-11-24 20:37:15', '2020-11-24 20:37:15'),
-(29, 4, 'admins', '16fcb1091f8a0cc70c96e2ff97fdd213', 'ad1234@dd.ddd', '', 1, 0, '2020-11-24 22:26:36', '2020-11-24 22:26:36');
+(29, 4, 'admins', '16fcb1091f8a0cc70c96e2ff97fdd213', 'ad1234@dd.ddd', '', 1, 0, '2020-11-24 22:26:36', '2020-11-24 22:26:36'),
+(30, 4, 'Nachi', '449367a9bbc5ea9a98b80a6a7c453128', 'nachimuthu12@gmail.com', 'nachi', 1, 0, '2020-12-03 03:05:16', '2020-12-03 03:05:16'),
+(35, 4, 'nachimuthu', '827ccb0eea8a706c4c34a16891f84e7b', 'nachimuthu@gmail.com', 'nachi', 1, 0, '2020-12-03 15:38:50', '2020-12-03 17:04:15'),
+(36, 4, 'nachimuthustaff', '449367a9bbc5ea9a98b80a6a7c453128', 'nachi@gmail.com', 'nachi', 1, 0, '2020-12-03 16:14:53', '2020-12-03 16:14:53'),
+(37, 4, 'test', 'b678c60ee60fd4374df211724aedf4f7', 'test@gmail.com', 'test', 1, 0, '2020-12-04 04:02:42', '2020-12-04 04:02:58'),
+(38, 4, 'testing', '10c095a6aa6815abf68478cb8f2c4ae1', 'test@GMAIL.COM', 'test', 1, 0, '2020-12-04 04:04:56', '2020-12-04 04:10:52');
 
 -- --------------------------------------------------------
 
@@ -485,7 +509,11 @@ INSERT INTO `rv_user_permission` (`user_id`, `page`) VALUES
 (29, 'client'),
 (29, 'dashboard'),
 (29, 'staff'),
-(29, 'trainer');
+(29, 'trainer'),
+(30, 'client'),
+(30, 'dashboard'),
+(30, 'staff'),
+(30, 'trainer');
 
 -- --------------------------------------------------------
 
@@ -546,7 +574,12 @@ INSERT INTO `rv_user_role_association` (`user_id`, `role_id`) VALUES
 (26, 2),
 (27, 2),
 (28, 2),
-(29, 2);
+(29, 2),
+(30, 2),
+(35, 3),
+(36, 4),
+(37, 3),
+(38, 4);
 
 --
 -- Indexes for dumped tables
@@ -613,6 +646,18 @@ ALTER TABLE `rv_package_pesonal_trainer_assoc`
   ADD PRIMARY KEY (`trainer_id`,`package_id`);
 
 --
+-- Indexes for table `rv_staff`
+--
+ALTER TABLE `rv_staff`
+  ADD PRIMARY KEY (`staff_id`);
+
+--
+-- Indexes for table `rv_trainer`
+--
+ALTER TABLE `rv_trainer`
+  ADD PRIMARY KEY (`trainer_id`);
+
+--
 -- Indexes for table `rv_user`
 --
 ALTER TABLE `rv_user`
@@ -645,46 +690,68 @@ ALTER TABLE `rv_user_role_association`
 --
 ALTER TABLE `rv_branches`
   MODIFY `branch_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+
 --
 -- AUTO_INCREMENT for table `rv_branches_timeslot`
 --
 ALTER TABLE `rv_branches_timeslot`
   MODIFY `slot_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+
 --
 -- AUTO_INCREMENT for table `rv_expenses`
 --
 ALTER TABLE `rv_expenses`
   MODIFY `expense_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+
 --
 -- AUTO_INCREMENT for table `rv_log`
 --
 ALTER TABLE `rv_log`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
 --
 -- AUTO_INCREMENT for table `rv_log_login`
 --
 ALTER TABLE `rv_log_login`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
 --
 -- AUTO_INCREMENT for table `rv_manager`
 --
 ALTER TABLE `rv_manager`
-  MODIFY `manager_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `manager_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+
 --
 -- AUTO_INCREMENT for table `rv_packages`
 --
 ALTER TABLE `rv_packages`
   MODIFY `package_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+
 --
 -- AUTO_INCREMENT for table `rv_package_group_class_types`
 --
 ALTER TABLE `rv_package_group_class_types`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+
+--
+-- AUTO_INCREMENT for table `rv_staff`
+--
+ALTER TABLE `rv_staff`
+  MODIFY `staff_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT for table `rv_trainer`
+--
+ALTER TABLE `rv_trainer`
+  MODIFY `trainer_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
 --
 -- AUTO_INCREMENT for table `rv_user`
 --
 ALTER TABLE `rv_user`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=39;
+COMMIT;
+
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

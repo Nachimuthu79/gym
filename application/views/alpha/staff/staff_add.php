@@ -11,7 +11,7 @@
               </div>
               <!-- /.card-header -->
               <!-- form start -->
-              <form role="form" id="form" action="" method="post" enctype="multipart/form-data">
+              <form role="form" id="form" action="" method="post" enctype="multipart/form-data" autocomplete="off">
                 <div class="card-body">
 					
                     <div class="row">
@@ -45,12 +45,6 @@
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label for="name">Confirm password</label>
-                                <input type="password" name="cpassword" class="form-control" id="cpassword" placeholder="Enter confirm password">
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="form-group">
                                 <label for="name">Type of employee</label>
                                 <select class="form-control" name="employee_type">
                                     <option value="">Select Type of employee</option>
@@ -61,14 +55,14 @@
                                 </select>
                             </div>
                         </div>
-                    </div>
-                    <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label for="dob">DOB</label>
-                                <input type="date" name="dob" class="form-control" id="dob" placeholder="Enter date of birth">
+                                <input type="text" name="dob" class="form-control" id="datepicker" placeholder="Enter date of birth">
                             </div>
                         </div>
+                    </div>
+                    <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label for="dob">Gender</label>
@@ -84,36 +78,34 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label for="phone">Phone Number</label>
                                 <input type="text" name="phone" class="form-control" id="phone" placeholder="Enter Phone">
                             </div>
                         </div>
+                    </div>
+                    <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label for="address_line1">Address Line 1</label>
                                 <input type="text" name="address_line1" class="form-control" id="address_line1" placeholder="Enter Address Line 1">
                             </div>
                         </div>
-                    </div>
-                    <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label for="address_line2">Address Line 2</label>
                                 <input type="text" name="address_line2" class="form-control" id="address_line1" placeholder="Enter Address Line 2">
                             </div>
                         </div>
+                    </div>
+                    <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label for="city">City</label>
                                 <input type="text" name="city" class="form-control" id="city" placeholder="Enter City">
                             </div>
                         </div>
-                    </div>
-                    <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label for="exampleInputFile">Document</label>
@@ -125,30 +117,32 @@
                                 </div>
                             </div>
                         </div>
+                    </div>
+                    <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label for="monthly_salary">Monthly Salary</label>
                                 <input type="text" name="monthly_salary" class="form-control" id="monthly_salary" placeholder="Enter monthly salary">
                             </div>
                         </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-4">
+                        <div class="col-md-6">
                             <div class="form-group">
                                 <label for="sales_target">Annual Sales Target</label>
                                 <input type="text" name="sales_target" class="form-control" id="sales_target" placeholder="Enter sales target">
                             </div>
                         </div>
-                        <div class="col-md-4">
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
                             <div class="form-group">
                                 <label for="monthly_target">Monthly target</label>
                                 <input type="text" name="monthly_target" class="form-control" id="monthly_target" placeholder="Enter monthly target">
                             </div>
                         </div>
-                        <div class="col-md-4">
+                        <div class="col-md-6">
                             <div class="form-group">
                                 <label for="daily_target">Daily target</label>
-                                <input type="password" name="daily_target" class="form-control" id="daily_target" placeholder="Enter daily target">
+                                <input type="text" name="daily_target" class="form-control" id="daily_target" placeholder="Enter daily target">
                             </div>
                         </div>
                     </div>
@@ -203,21 +197,67 @@
     
     
 <?php
-
+$target = site_url('dashboard/username_check');
 $js = <<<EOD
 
 <script type="text/javascript">
 $(document).ready(function () {
-
-
+  username_validation = 0 ;
   $.validator.setDefaults({
     submitHandler: function () {
-    
+   
+   if(username_validation == 0 )
+   {
+		
+var fd = new FormData($('form')[0]);    
+$('button[type="submit"]').attr('disabled',true);
+
+
+$.ajax({
+  url: '$target',
+  data: fd,
+  processData: false,
+  contentType: false,
+  type: 'POST',
+  success: function(response){
+    	 
+    if(response == 1) { 
+    username_validation = 1;
+    $('form').submit();
+	}
+	else
+	{
+        username_validation = 0;
+        validator.showErrors({
+            "username": "This username is not available."
+	});
+	
+	}
+	
+	$('button[type="submit"]').attr('disabled',false);
+
+  }
+});
+
+    return false;
+
+}
+else
+{
     return true;
+
+}
+		 
     }
   });
   
-  $('#form').validate({
+  $('#username').change(function(){
+   username_validation = 0;
+        $('#username-error').remove();
+
+});
+  
+  validator = $('#form').validate({
     rules: {
       email: {
         required: true,
@@ -231,6 +271,7 @@ $(document).ready(function () {
       },
        username: {
         required: true,
+        minlength : 5
       },
        employee_type: {
         required: true,
@@ -239,10 +280,6 @@ $(document).ready(function () {
         required: true,
         minlength : 5
       },
-      cpassword : {
-        minlength : 5,
-        equalTo : "#password"
-        },
        dob: {
         required: true,
       },
@@ -251,12 +288,11 @@ $(document).ready(function () {
       },
        phone: {
         required: true,
-      },
-       document: {
-        required: true,
+        number:true
       },
        monthly_salary: {
         required: true,
+        number:true
       },    
        sales_target: {
         required: true,
@@ -309,6 +345,11 @@ $(document).ready(function () {
       $(this).bootstrapSwitch('state', $(this).prop('checked'));
     });
     
+  //Date picker
+    $('#datepicker').datepicker({
+        endDate: '+0d',
+        autoclose: true
+    })
 });
 
 

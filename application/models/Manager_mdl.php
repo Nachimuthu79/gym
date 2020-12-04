@@ -23,7 +23,6 @@ class Manager_mdl extends CI_Model {
 		
 		$this->db->insert('manager',$data);
 		return  $this->db->insert_id();
-			
 		
 		}
 	
@@ -48,8 +47,6 @@ class Manager_mdl extends CI_Model {
 		$data['data_modified'] = date('Y-m-d H:i:s');
 		$this->db->where('manager_id',$manager_id);
 		$this->db->update('manager',$data);
-
-		
 		return true;
 	}
 	

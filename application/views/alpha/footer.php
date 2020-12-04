@@ -49,6 +49,10 @@ if(isset($plugins) && is_array($plugins) ) {
 				$js[]= array('plugins/moment/moment.min.js');
 				$js[]= array('plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js');
 			}
+            if($pluginname == "datepicker") {
+                $js[]= array('plugins/moment/moment.min.js');
+                $js[]= array('plugins/bootstrap-datepicker/bootstrap-datepicker.min.js');
+            }
 			
 		}
 	}

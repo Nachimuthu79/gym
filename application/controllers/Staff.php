@@ -91,6 +91,7 @@ function __construct() {
 		$data['plugins']['jQueryValidate'] = 1 ;
 		$data['plugins']['switchButton'] = 1 ;
 		$data['condition']['brach_select'] = 1 ;
+        $data['plugins']['datepicker'] = 1 ;
 
 		$this->template->load_template($data);
 	}
@@ -107,8 +108,10 @@ function __construct() {
 		if($this->input->post())
 		{
 			$staff_id = $this->staff_mdl->edit_staff($staff_id);
+            $this->common_mdl->edit_user($staff_details['user_id']);
 			if($staff_id) {
                 if (isset($_FILES['document']) && !empty($_FILES['document']['name'])) {
+                    unlink(FCPATH. "images/document/".$staff_details['document']);
                     $fileInfo = pathinfo($_FILES['document']['name']);
                     $img_name = rand() . '.' . $fileInfo['extension'];
                     $ImageName = $img_name;
@@ -120,6 +123,7 @@ function __construct() {
                     $this->staff_mdl->update_files($staff_id, $file_name, $column_name);
                 }
                 if (isset($_FILES['picture']) && !empty($_FILES['picture']['name'])) {
+                    unlink(FCPATH. "images/profile_picture/".$staff_details['profile_pic']);
                     $fileInfo = pathinfo($_FILES['picture']['name']);
                     $img_name = rand() . '.' . $fileInfo['extension'];
                     $ImageName = $img_name;
@@ -147,6 +151,7 @@ function __construct() {
 		$data['plugins']['jQueryValidate'] = 1 ;
 		$data['plugins']['switchButton'] = 1 ;
 		$data['condition']['brach_select'] = 1 ;
+        $data['plugins']['datepicker'] = 1 ;
 
 		$data['staff_details'] = $staff_details;
 		$this->template->load_template($data);

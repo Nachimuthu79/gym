@@ -1,11 +1,3 @@
- 
-
- <style>
-     #customRadio1 {
-         padding: 0px 10px 0px 20px;
-     }
-
- </style>
  <section class="content">
       <div class="container-fluid">
         <div class="row">
@@ -18,7 +10,7 @@
               </div>
               <!-- /.card-header -->
               <!-- form start -->
-              <form role="form" id="form" action="" method="post" enctype="multipart/form-data">
+              <form role="form" id="form" action="" method="post" enctype="multipart/form-data" autocomplete="off">
                 <div class="card-body">
 					
                     <div class="row">
@@ -52,18 +44,10 @@
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label for="name">Confirm password</label>
-                                <input type="password" name="cpassword" class="form-control" id="cpassword" placeholder="Enter confirm password">
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="form-group">
                                 <label for="dob">DOB</label>
-                                <input type="date" name="dob" class="form-control" id="dob" placeholder="Enter date of birth">
+                                <input type="text" name="dob" class="form-control" id="datepicker" placeholder="Enter date of birth">
                             </div>
                         </div>
-                    </div>
-                    <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label for="dob">Gender</label>
@@ -79,28 +63,28 @@
                                 </div>
                             </div>
                         </div>
+                    </div>
+                    <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label for="phone">Phone Number</label>
                                 <input type="text" name="phone" class="form-control" id="phone" placeholder="Enter Phone">
                             </div>
                         </div>
-                    </div>
-                    <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label for="address_line1">Address Line 1</label>
                                 <input type="text" name="address_line1" class="form-control" id="address_line1" placeholder="Enter Address Line 1">
                             </div>
                         </div>
+                    </div>
+                    <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label for="address_line2">Address Line 2</label>
                                 <input type="text" name="address_line2" class="form-control" id="address_line1" placeholder="Enter Address Line 2">
                             </div>
                         </div>
-                    </div>
-                    <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label for="exampleInputFile">Document</label>
@@ -112,59 +96,61 @@
                                 </div>
                             </div>
                         </div>
+                    </div>
+                    <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label for="monthly_salary">Monthly Salary</label>
                                 <input type="text" name="monthly_salary" class="form-control" id="monthly_salary" placeholder="Enter monthly salary">
                             </div>
                         </div>
-                    </div>
-                    <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label for="training_commision">Personal_training_commision</label>
+                                <label for="training_commision">Personal training commision</label>
                                 <input type="text" name="training_commision" class="form-control" id="training_commision" placeholder="Enter training commision">
                             </div>
                         </div>
+                    </div>
+                    <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label for="sales_target">Annual Sales Target</label>
                                 <input type="text" name="sales_target" class="form-control" id="sales_target" placeholder="Enter sales target">
                             </div>
                         </div>
-                    </div>
-                    <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label for="monthly_target">Monthly target</label>
                                 <input type="text" name="monthly_target" class="form-control" id="monthly_target" placeholder="Enter monthly target">
                             </div>
                         </div>
+                    </div>
+                    <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label for="daily_target">Daily target</label>
-                                <input type="password" name="daily_target" class="form-control" id="daily_target" placeholder="Enter daily target">
+                                <input type="text" name="daily_target" class="form-control" id="daily_target" placeholder="Enter daily target">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="exampleInputFile">profile picture</label>
+                                <div class="input-group">
+                                    <div class="custom-file">
+                                        <input type="file" class="custom-file-input" id="exampleInputFile" name="profile_pic">
+                                        <label class="custom-file-label" for="exampleInputFile">Choose file</label>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
-
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">
                                 <br>
                                 <label for="status">Status</label> <br>
-                                <input type="checkbox" name="status" value="1" checked data-bootstrap-switch data-off-color="danger" data-on-color="success" data-off-text="Deactive" data-on-text="Active" >
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label for="exampleInputFile">Document</label>
-                                <div class="input-group">
-                                    <div class="custom-file">
-                                        <input type="file" class="custom-file-input" id="exampleInputFile" name="document">
-                                        <label class="custom-file-label" for="exampleInputFile">Choose file</label>
-                                    </div>
-                                </div>
+                                <input type="checkbox" name="status" value="1" checked data-bootstrap-switch data-off-color="danger"
+                                       data-on-color="success" data-off-text="Deactive" data-on-text="Active" >
                             </div>
                         </div>
                     </div>
@@ -191,27 +177,106 @@
     
     
 <?php
-
+$target = site_url('dashboard/username_check');
 $js = <<<EOD
-
 <script type="text/javascript">
+
 $(document).ready(function () {
 
-
+username_validation = 0 ;
   $.validator.setDefaults({
     submitHandler: function () {
-    
+   
+   if(username_validation == 0 )
+   {
+		
+var fd = new FormData($('form')[0]);    
+$('button[type="submit"]').attr('disabled',true);
+
+
+$.ajax({
+  url: '$target',
+  data: fd,
+  processData: false,
+  contentType: false,
+  type: 'POST',
+  success: function(response){
+    	 
+    if(response == 1) { 
+    username_validation = 1;
+    $('form').submit();
+	}
+	else
+	{
+        username_validation = 0;
+        validator.showErrors({
+            "username": "This username is not available."
+	});
+	
+	
+	}
+	
+	$('button[type="submit"]').attr('disabled',false);
+
+  }
+});
+
+    return false;
+
+}
+else
+{
     return true;
+
+}
+		 
     }
   });
   
-  $('#form').validate({
+  $('#username').change(function(){
+   username_validation = 0;
+        $('#username-error').remove();
+
+});
+  
+  validator = $('#form').validate({
     rules: {
-      email: {
+      email_address: {
         required: true,
         email: true,
       },
       name: {
+        required: true,
+      },
+       username: {
+        required: true,
+      },
+       dob: {
+        required: true,
+      },
+      gender: {
+        required: true,
+      },
+       phone: {
+        required: true,
+        number:true
+      },
+      document: {
+        required: true,
+      },
+       training_commision: {
+        required: true,
+      },
+      sales_target: {
+        required: true,
+      },
+       daily_target: {
+        required: true,
+      },
+      monthly_target: {
+        required: true,
+      },
+      profile_pic: {
         required: true,
       },
       address_line1: {
@@ -223,14 +288,14 @@ $(document).ready(function () {
       city: {
         required: true,
       },
+       monthly_salary: {
+        required: true,
+        number:true
+      },
       password: {
         required: true,
         minlength : 5
       },
-      cpassword : {
-        minlength : 5,
-        equalTo : "#password"
-        }
     },
     messages: {
       email: {
@@ -258,8 +323,12 @@ $(document).ready(function () {
       $(this).bootstrapSwitch('state', $(this).prop('checked'));
     });
     
+  //Date picker
+    $('#datepicker').datepicker({
+        endDate: '+0d',
+        autoclose: true
+    })
 });
-
 
 </script>
 
