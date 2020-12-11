@@ -79,6 +79,9 @@ class Trainer_mdl extends CI_Model {
 	
 	function delete_trainer($trainer_id)
     {
+		
+		//~ echo $trainer_id;
+		//~ die(); 
 		$this->db->where('trainer_id',$trainer_id);
 		$this->db->update('trainer',array('is_deleted'=>1));
 		return true;

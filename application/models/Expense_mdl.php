@@ -113,13 +113,14 @@ class Expense_mdl extends CI_Model {
 		$this->db->select('count(*) as allcount');
 		
 		if($search)
-		{
+		{	$this->db->group_start();
 			$this->db->like('date', $search);
 			$this->db->or_like('type', $search);
 			$this->db->or_like('amount', $search);
 			$this->db->or_like('description', $search);
 			$this->db->or_like('payment_method', $search);
 			$this->db->or_like('created_by', $search);
+			$this->db->group_end();
 		} 
 		
 		$records = $this->db->get('expenses')->result();
@@ -133,12 +134,14 @@ class Expense_mdl extends CI_Model {
 		$this->db->order_by($fields[$order_column], $order_type );
 		if($search)
 		{
+			$this->db->group_start();
 			$this->db->like('date', $search);
 			$this->db->or_like('type', $search);
 			$this->db->or_like('amount', $search);
 			$this->db->or_like('description', $search);
 			$this->db->or_like('payment_method', $search);
 			$this->db->or_like('created_by', $search);
+			$this->db->group_end();
 		}
 		$this->db->where('expenses.is_deleted', 0);
 		

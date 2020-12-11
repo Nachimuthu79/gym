@@ -81,6 +81,7 @@ function __construct() {
 		$data['pagetitle'] = 'Add Manager';
 		$data['path'] = 'managers/managers_add';
 		$data['plugins']['jQueryValidate'] = 1 ;
+		$data['plugins']['profileImage'] = 1 ;
 		$data['plugins']['switchButton'] = 1 ;
 		$data['condition']['brach_select'] = 1 ;
 
@@ -129,6 +130,7 @@ function __construct() {
 		$data['pagetitle'] = 'Managers';
 		$data['path'] = 'managers/managers_edit';
 		$data['condition']['brach_select'] = 1 ;
+		$data['plugins']['profileImage'] = 1 ;
 		$data['plugins']['jQueryValidate'] = 1 ;
 		$data['plugins']['switchButton'] = 1 ;
 		$data['manager_details'] = $manager_details;

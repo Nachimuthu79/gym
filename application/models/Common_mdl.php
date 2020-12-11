@@ -179,10 +179,70 @@ class Common_mdl extends CI_Model {
 	 function get_all_trainers() {
 		 
 		 
-		 return array(1 => "Loga", 2 => "Nathan");
+		$this->db->select('*');
+		
+		$this->db->where('is_deleted', 0);
+		$this->db->where('status', 1);
+		$records = $this->db->get('trainer')->result_array();
+		$datas = array();
+	
+	
+		foreach($records as $r)
+		{
+			$datas[$r['trainer_id']] = $r['name'];
+			
+		}
+		
+		return $datas;
 		 
 	 }
+	
+	function payment_tracking($payment_id,$status) {
+	
+	$data = array();
+	
+	$data['payment_id'] = $payment_id;	
+	$data['user_id'] = $this->auth->user_id;	
+	$data['change_status'] = $status;	
+	$data['data_created'] = date('Y-m-d H:i:s');	
+	$data['data_modified']= date('Y-m-d H:i:s');
+		
+	 $this->db->insert('payment_actions', $data);
 
+
+	}
+	
+	function upload_profile_pic_base64()
+	{
+		
+		if(empty($this->input->post("profile_image_base64"))) { return false; } 
+	
+	$folderPath = "images/profile_picture/";
+	$data  = $this->input->post("profile_image_base64");
+	
+	 $image_parts = explode(";base64,", $data);
+	 
+	
+
+        $image_type_aux = explode("image/", $image_parts[0]);
+
+        $image_type = $image_type_aux[1];
+
+        $image_base64 = base64_decode($image_parts[1]);
+		$fine_name = uniqid() . '.'.$image_type;
+         $file = $folderPath . $fine_name;
+
+
+       $s =  file_put_contents($file, $image_base64);
+        chmod($file, 0777);
+        
+        if($s)
+        {
+			return $fine_name;
+		}
+		
+	return false;
+	}
 
 	 
 	 

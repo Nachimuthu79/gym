@@ -16,6 +16,14 @@ class Manager_mdl extends CI_Model {
 		$data['mobile'] = $input['mobile'];
 		$data['address_line1'] = $input['address_line1'];
 		$data['address_line2'] = $input['address_line2'];
+		if(($profile_pic = $this->common_mdl->upload_profile_pic_base64()) != false)
+		{
+			$data['profile_pic'] = $profile_pic;
+		}
+		else
+		{
+			$data['profile_pic'] = 'default.png';
+		}
 		$data['city'] = $input['city'];
 		$data['zipcode'] = $input['zipcode'];
 		$data['data_created'] = date('Y-m-d H:i:s');
@@ -23,6 +31,7 @@ class Manager_mdl extends CI_Model {
 		
 		$this->db->insert('manager',$data);
 		return  $this->db->insert_id();
+			
 		
 		}
 	
@@ -42,11 +51,17 @@ class Manager_mdl extends CI_Model {
 		$data['mobile'] = $input['mobile'];
 		$data['address_line1'] = $input['address_line1'];
 		$data['address_line2'] = $input['address_line2'];
+		if(($profile_pic = $this->common_mdl->upload_profile_pic_base64()) != false)
+		{
+			$data['profile_pic'] = $profile_pic;
+		}
 		$data['city'] = $input['city'];
 		$data['zipcode'] = $input['zipcode'];
 		$data['data_modified'] = date('Y-m-d H:i:s');
 		$this->db->where('manager_id',$manager_id);
 		$this->db->update('manager',$data);
+
+		
 		return true;
 	}
 	

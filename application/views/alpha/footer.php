@@ -1,7 +1,9 @@
 </div>
   </div>
    </div>
- 
+<script>
+var base_url = '<?php echo base_url(); ?>';	 
+</script>
  
  
  
@@ -31,9 +33,24 @@ if(isset($plugins) && is_array($plugins) ) {
 			$js[]=array('plugins/datatables-responsive/js/dataTables.responsive.min.js');
 			}
 			
+						if($pluginname == "datatable-buttons") {
+			$js[]= array('plugins/datatables-buttons/js/dataTables.buttons.min.js'); 
+			$js[]= array('plugins/datatables-buttons/js/jszip.min.js'); 
+			$js[]= array('plugins/datatables-buttons/js/pdfmake.min.js'); 
+			$js[]= array('plugins/datatables-buttons/js/vfs_fonts.js'); 
+			$js[]= array('plugins/datatables-buttons/js/buttons.html5.min.js'); 
+
+
+		}
+			
 			if($pluginname == "jQueryValidate") {
 			$js[]= array('plugins/jquery-validation/jquery.validate.min.js');
 			$js[]=array('plugins/jquery-validation/additional-methods.min.js');
+			}
+			
+			if($pluginname == "profileImage") {
+			$js[]= array('plugins/profileImage/webcam.min.js');
+			$js[]= array('plugins/profileImage/profileImage.js');
 			}
 			
 			if($pluginname == "switchButton") {
@@ -49,7 +66,8 @@ if(isset($plugins) && is_array($plugins) ) {
 				$js[]= array('plugins/moment/moment.min.js');
 				$js[]= array('plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js');
 			}
-            if($pluginname == "datepicker") {
+			
+			if($pluginname == "datepicker") {
                 $js[]= array('plugins/moment/moment.min.js');
                 $js[]= array('plugins/bootstrap-datepicker/bootstrap-datepicker.min.js');
             }
@@ -122,5 +140,4 @@ $js = array(
 	
 	
 	
-      
- 
+   

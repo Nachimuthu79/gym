@@ -41,6 +41,7 @@ function __construct() {
 		$data['pagetitle'] = 'Expenses';
 		$data['path'] = 'expenses/expenses';
 		$data['plugins']['datatable'] = 1 ;
+		$data['plugins']['datatable-buttons'] = 1 ;
 		$data['plugins']['daterangepicker'] = 1 ;
 		$data['condition']['brach_select'] = 1 ;
 		

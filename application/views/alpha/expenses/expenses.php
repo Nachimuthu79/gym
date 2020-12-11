@@ -60,6 +60,35 @@ $js = <<<EOD
   var end_date = '$end_date';
   
    var table = $('#table').DataTable( {
+   
+  dom: 'Bfrtip',
+        buttons: [
+             {
+         extend: 'csv',
+         text: 'CSV',
+         className: 'btn btn-danger',
+         exportOptions: {
+            columns: 'th:not(:last-child)'
+         }
+         },
+         {
+         extend: 'excel',
+         text: 'Excel',
+         className: 'btn btn-success',
+         exportOptions: {
+            columns: 'th:not(:last-child)'
+         }
+         },
+         {
+         extend: 'pdf',
+         text: 'PDF',
+         className: 'btn btn-primary',
+         exportOptions: {
+            columns: 'th:not(:last-child)'
+         }
+	 }
+         
+        ],
         "processing": true,
         "aoColumnDefs": [
         { "bSortable": false, "aTargets": [ 6 ] }    ],

@@ -27,6 +27,7 @@ class Package_mdl extends CI_Model {
 		$data['cloase_booking_before'] = $input['cloase_booking_before'];
 		$data['maximum_classes'] = $input['maximum_classes'];
 		$data['cancel_policy'] = $input['cancel_policy'];
+		$data['cancel_booking_before'] = $input['cancel_booking_before'];
 		}
 		
 		
@@ -66,6 +67,8 @@ class Package_mdl extends CI_Model {
 		$data['cloase_booking_before'] = $input['cloase_booking_before'];
 		$data['maximum_classes'] = $input['maximum_classes'];
 		$data['cancel_policy'] = $input['cancel_policy'];
+				$data['cancel_booking_before'] = $input['cancel_booking_before'];
+
 		}
 		
 		

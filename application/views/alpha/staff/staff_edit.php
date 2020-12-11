@@ -137,13 +137,18 @@
                                         <div class="input-group">
                                             <div class="custom-file">
                                                 <?php
+                                                if($staff_details['document']) {
+													
+													
                                                 $extenstion = (explode(".",$staff_details['document']));
                                                 if(($extenstion[1] == 'png') or ($extenstion[1] == 'jpg') or ($extenstion[1] == 'jpeg')){ ?>
                                                     <img src="<?php echo base_url('images/document/'.$staff_details['document']);?>"
                                                          style="height:50px;width:70px;">
                                                 <?php } else { ?>
                                                     <a href="<?php echo base_url('images/document/'.$staff_details['document']);?>"><?php echo $staff_details['document'];?></a>
-                                                <?php } ?>
+                                                <?php } 
+                                                }
+                                                ?>
 
                                             </div>
                                         </div>

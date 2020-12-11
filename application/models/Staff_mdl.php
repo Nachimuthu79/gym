@@ -29,7 +29,8 @@ class Staff_mdl extends CI_Model {
 
             $this->db->insert('staff', $data);
             $staff_id = $this->db->insert_id();
-            return $staff_id;
+            
+              return $staff_id;
         }
 	}
 
@@ -85,7 +86,7 @@ class Staff_mdl extends CI_Model {
 	
 	function delete_staff($staff_id)
     {
-		$this->db->where('staff_id',$staff_id);
+		$this->db->where('staff_id',$staff_id); 
 		$this->db->update('staff',array('is_deleted'=>1));
 		return true;
 	}
@@ -146,8 +147,8 @@ class Staff_mdl extends CI_Model {
                           Action
                           </button>
                           <div class="dropdown-menu">
-                            <a class="dropdown-item" href="'.site_url('staff/edit/'.$r['staff_id']).'">Edit Details</a>
-                            <a class="dropdown-item" onclick="return confirm(\'Do you want to delete the trainer?\')" href="'.site_url('trainers/delete/'.$r['staff_id']).'">Delete</a>
+                            <a class="dropdown-item" href="'.site_url('staff/edit/'.$r['staff_id']).'">Edit tDetails</a>
+                            <a class="dropdown-item" onclick="return confirm(\'Do you want to delete the Staff?\')" href="'.site_url('staff/delete/'.$r['staff_id']).'">Delete</a>
                           </div>
                         </div>');
 		}

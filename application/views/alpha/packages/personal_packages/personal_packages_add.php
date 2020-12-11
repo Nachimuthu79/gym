@@ -68,7 +68,7 @@
                     <div class="col-md-2">
                   <div class="form-group">
                     <label for="cancel_policy">Cancel Policy</label> <br>
-                       <input type="checkbox" name="cancel_policy" value="1" checked data-bootstrap-switch data-off-color="danger" data-on-color="success" data-off-text="No" data-on-text="Yes" >
+                       <input type="checkbox" id="cancel_policy" name="cancel_policy" value="1" checked data-bootstrap-switch data-off-color="danger" data-on-color="success" data-off-text="No" data-on-text="Yes" >
                   
                   </div>
                   </div>
@@ -81,6 +81,16 @@
                   
                   </div>
                   </div>
+                  
+                  
+                  
+                   <div class="col-md-4" id="cancel_booking_before_div">
+                  <div class="form-group">
+                    <label for="cancel_booking_before">Cancel Booking Before (hours)</label>
+                    <input type="number" name="cancel_booking_before" class="form-control" id="cancel_booking_before" placeholder="Cancel Booking">
+                  </div>
+                  </div>
+                  
                   
                   
                   
@@ -159,6 +169,18 @@ $js = <<<EOD
 
 <script type="text/javascript">
 $(document).ready(function () {
+
+
+
+$('#cancel_policy').on('switchChange.bootstrapSwitch', function (event, state) {
+
+if($("#cancel_policy").is(':checked')) {
+$('#cancel_booking_before_div').show();
+    } else {
+$('#cancel_booking_before_div').hide();
+    }
+       
+});
 
  $.validator.setDefaults({
     submitHandler: function () {

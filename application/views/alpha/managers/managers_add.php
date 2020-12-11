@@ -111,10 +111,44 @@
                   </div>
                   </div>
                   </div>
+                  <br>
                   
-                 
+                  <h4>Profile Picture</h4>
+                                    <br>
+	
+                 	<div class="row">
+						
+					  <div class="col-md-4">
+						  
+						  
+
+
+
+						 <div class="profile_imager"><img class="profile_picture" src="<?php echo base_url('images/profile_picture/default.png') ?>">
+						  
+						  <button type="button" class="btn btn-block profile_picture_up_but btn-info btn-sm">Upload</button>
+						   <button type="button" class="btn btn-block profile_picture_ca_but btn-secondary btn-sm">Camara</button>	<input type="file" name="profile_image" accept="image/x-png,image/gif,image/jpeg"  id="profile_image">					  
+						  <input type="hidden" name="profile_image_base64" id="profile_image_base64">					  
+						  </div>
+						  </div>
+						  
+						  					  <div class="col-md-4">
+										<div class="camara_window" style="display:none">
+												<div id="my_camera"></div>
+						  	<br>
+						  							  <button type="button" class="btn btn-danger profile_picture_snpsh_but btn-info btn-sm">Take Snapshot</button>
+
+										</div>
+
+						  </div>
+
+
+					</div>
+					</div>
                   
                 
+                 
+                 
                  
                 </div>
                 <!-- /.card-body -->
@@ -145,6 +179,7 @@ $js = <<<EOD
 
 <script type="text/javascript">
 $(document).ready(function () {
+
 
 username_validation = 0 ;
 

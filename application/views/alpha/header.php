@@ -28,13 +28,16 @@ if(isset($plugins) && is_array($plugins) ) {
 			if($pluginname == "datatable") {
 			$css[] = array('plugins/datatables-bs4/css/dataTables.bootstrap4.min.css'); 
 			}
+			if($pluginname == "datatable-buttons") { 
+			$css[] = array('plugins/datatables-buttons/css/buttons.bootstrap4.min.css'); 
+			}
 			if($pluginname == "dateRange") {
 			$css[] = array('plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css'); 
 			}
 			if($pluginname == "daterangepicker") {
 			$css[] = array('plugins/daterangepicker/daterangepicker.css'); 
 			}
-            if($pluginname == "datepicker") {
+			if($pluginname == "datepicker") {
                 $css[] = array('plugins/bootstrap-datepicker/bootstrap-datepicker.min.css');
             }
 			

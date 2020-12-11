@@ -68,6 +68,8 @@ position: absolute;
     right: 20px;
 }
 
+
+
 /*datepicker*/
 .datepicker {
     padding: 23px !important;
@@ -75,3 +77,72 @@ position: absolute;
 .datepicker .table-condensed {
     line-height: 32px;
 }
+
+.nf
+{
+    text-align: center;
+    padding: 25px;
+    font-size: 18px;
+    color: #666262;
+
+}
+
+.none
+{     color: #898282;
+    font-style: italic;
+
+}
+
+.profile_picture
+{
+    width: auto; 
+    height: auto;
+	max-width: 300px;
+    display:block;
+        margin: auto;
+        
+
+}
+.profile_image
+{
+
+}
+.profile_picture_ca_but
+{
+display: inline-block;
+    max-width: 125px;
+    margin: auto !important;
+        margin-top: 25px !important;
+
+}
+
+.profile_picture_up_but
+{display: inline-block;
+    max-width: 125px;
+    margin: auto !important;
+        margin-top: 25px !important;
+
+
+}
+
+#profile_image
+{
+    opacity: 0;
+    width: 1px;
+    height: 1px;
+}
+.profile_imager
+{
+    text-align: center;
+
+}
+.camara_window
+{
+    text-align: center;
+    }
+    #my_camera
+    {
+        width: 250px;
+    height: 250px;
+    margin: auto;
+    }

@@ -140,8 +140,8 @@ function __construct() {
 			}
 			else
 			{
-				$this->template->notification('warning','Unable to Create the Branch');
-				$this->template->redirect('trainers');
+				$this->template->notification('warning','Unable to Create the Staff');
+				$this->template->redirect('staff');
 			}
 		}
 
@@ -159,16 +159,16 @@ function __construct() {
 
 	function delete($staff_id)
 	{
-		$this->auth->has_PagePermission('trainer');
-		if($this->staff_mdl->delete_trainer($staff_id)) {
+		$this->auth->has_PagePermission('staff');
+		if($this->staff_mdl->delete_staff($staff_id)) {
 			
 				$this->template->notification('success','Staff deleted successfully');
-				$this->template->redirect('trainers');
+				$this->template->redirect('staff');
 		}
 		else
 		{
 				$this->template->notification('warning','Requested Staff Not available');
-				$this->template->redirect('trainers');
+				$this->template->redirect('staff');
 		}
 	}
 }
