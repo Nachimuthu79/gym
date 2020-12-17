@@ -12,10 +12,23 @@
             <!-- left column -->
             <div class="col-md-12">
                 <!-- jquery validation -->
-                <div class="card card-primary">
-                    <div class="card-header">
-                        <h3 class="card-title">Create Staff<small>	</small></h3>
+                <div class="card card-primary card-tabs">
+                    <div class="card-header p-0 pt-1">
+
+                        <ul class="nav nav-tabs" id="custom-tabs-one-tab" role="tablist">
+                            <li class="nav-item">
+                                <a class="nav-link active"  id="custom-tabs-one-home-tab"  aria-selected="true">Details</a>
+                            </li>
+
+                            <li class="nav-item">
+                                <a class="nav-link"  href="<?php echo site_url('staff/settings/'.$staff_details['staff_id']); ?>"   id="custom-tabs-one-home-tab" >Settings</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link"  href="<?php echo site_url('staff/documents/'.$staff_details['staff_id']); ?>"   id="custom-tabs-one-home-tab" >Documents</a>
+                            </li>
+                        </ul>
                     </div>
+                <div class="card card-primary">
                     <!-- /.card-header -->
                     <!-- form start -->
                     <form role="form" id="form" action="" method="post" enctype="multipart/form-data">
@@ -75,16 +88,15 @@
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label for="dob">Gender</label>
-                                        <div class="form-check">
-                                            <label class="form-check-label" for="radio2">
-                                                <input type="radio" class="form-check-input" id="gender_radio" name="gender" value="1" <?php  echo $staff_details['gender'] ==1 ? 'checked': ''; ?>>Male
-                                            </label>
+                                        <label for="email_address">Gender</label>
+                                        <br>
+                                        <div class="icheck-primary  d-inline">
+                                            <input type="radio"  id="gender_male"  <?php echo ($staff_details['gender'] == "male" ) ? 'checked' : ''; ?> value="male" name="gender">
+                                            <label for="gender_male">Male</label>
                                         </div>
-                                        <div class="form-check">
-                                            <label class="form-check-label" for="radio2">
-                                                <input type="radio" class="form-check-input" id="gender_radio" name="gender" value="2" <?php  echo $staff_details['gender'] ==2 ? 'checked': ''; ?>>Female
-                                            </label>
+                                        <div class="icheck-primary  d-inline">
+                                            <input type="radio"  id="gender_female" <?php echo ($staff_details['gender'] == "female" ) ? 'checked' : ''; ?> value="female" name="gender">
+                                            <label for="gender_female">Female</label>
                                         </div>
                                     </div>
                                 </div>
@@ -120,42 +132,6 @@
                                                value="<?php  echo $staff_details['city']; ?>" placeholder="Enter City">
                                     </div>
                                 </div>
-                                <div class="col-md-3">
-                                    <div class="form-group">
-                                        <label for="exampleInputFile">Document</label>
-                                        <div class="input-group">
-                                            <div class="custom-file">
-                                                <input type="file" class="custom-file-input" id="exampleInputFile" name="document">
-                                                <label class="custom-file-label" for="exampleInputFile">Choose file</label>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-3">
-                                    <div class="form-group">
-                                        <label for="exampleInputFile">Document</label>
-                                        <div class="input-group">
-                                            <div class="custom-file">
-                                                <?php
-                                                if($staff_details['document']) {
-													
-													
-                                                $extenstion = (explode(".",$staff_details['document']));
-                                                if(($extenstion[1] == 'png') or ($extenstion[1] == 'jpg') or ($extenstion[1] == 'jpeg')){ ?>
-                                                    <img src="<?php echo base_url('images/document/'.$staff_details['document']);?>"
-                                                         style="height:50px;width:70px;">
-                                                <?php } else { ?>
-                                                    <a href="<?php echo base_url('images/document/'.$staff_details['document']);?>"><?php echo $staff_details['document'];?></a>
-                                                <?php } 
-                                                }
-                                                ?>
-
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="monthly_salary">Monthly Salary</label>
@@ -163,6 +139,8 @@
                                                value="<?php  echo $staff_details['monthly_salary']; ?>" placeholder="Enter monthly salary">
                                     </div>
                                 </div>
+                            </div>
+                            <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="sales_target">Annual Sales Target</label>
@@ -170,8 +148,6 @@
                                                value="<?php  echo $staff_details['sales_target']; ?>" placeholder="Enter sales target">
                                     </div>
                                 </div>
-                            </div>
-                            <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="monthly_target">Monthly target</label>
@@ -179,6 +155,8 @@
                                                value="<?php  echo $staff_details['monthly_target']; ?>" placeholder="Enter monthly target">
                                     </div>
                                 </div>
+                            </div>
+                            <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="daily_target">Daily target</label>
@@ -186,34 +164,11 @@
                                                value="<?php  echo $staff_details['daily_target']; ?>" id="daily_target" placeholder="Enter daily target">
                                     </div>
                                 </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-4">
+                                <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="discount">Max. discount %</label>
                                         <input type="text" name="discount" class="form-control" id="discount"
                                                value="<?php  echo $staff_details['discount']; ?>" placeholder="Enter daily target">
-                                    </div>
-                                </div>
-                                <div class="col-md-2">
-                                    <div class="form-group">
-                                        <label for="exampleInputFile">Document</label>
-                                        <div class="input-group">
-                                            <div class="custom-file">
-                                                <input type="file" class="custom-file-input" id="exampleInputFile" name="picture">
-                                                <label class="custom-file-label" for="exampleInputFile">Choose file</label>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-2">
-                                    <div class="form-group">
-                                        <label for="exampleInputFile">Picture</label>
-                                        <div class="input-group">
-                                            <div class="custom-file">
-                                                <img src="<?php echo base_url('images/profile_picture/'.$staff_details['profile_pic']);?>" style="height:50px;width:70px;">
-                                            </div>
-                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -223,6 +178,29 @@
                                         <br>
                                         <label for="status">Status</label><br>
                                         <input type="checkbox" name="status" value="1" checked data-bootstrap-switch data-off-color="danger" data-on-color="success" data-off-text="Deactive" data-on-text="Active" >
+                                    </div>
+                                </div>
+                            </div>
+                            <br>
+                            <h4>Profile Picture</h4>
+                            <br>
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="profile_imager"><img class="profile_picture" src="<?php
+                                        if(!$staff_details['profile_pic']) { $staff_details['profile_pic'] = 'default.png'; }
+                                        echo base_url('images/profile_picture/'.$staff_details['profile_pic']); ?>">
+
+                                        <button type="button" class="btn btn-block profile_picture_up_but btn-info btn-sm">Upload</button>
+                                        <button type="button" class="btn btn-block profile_picture_ca_but btn-secondary btn-sm">Camara</button>	<input type="file" name="profile_image" accept="image/png,image/gif,image/jpeg"  id="profile_image">
+                                        <input type="hidden" name="profile_image_base64" id="profile_image_base64">
+                                    </div>
+                                </div>
+
+                                <div class="col-md-4">
+                                    <div class="camara_window" style="display:none">
+                                        <div id="my_camera"></div>
+                                        <br>
+                                        <button type="button" class="btn btn-danger profile_picture_snpsh_but btn-info btn-sm">Take Snapshot</button>
                                     </div>
                                 </div>
                             </div>

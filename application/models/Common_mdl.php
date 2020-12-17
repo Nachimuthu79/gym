@@ -221,8 +221,6 @@ class Common_mdl extends CI_Model {
 	$data  = $this->input->post("profile_image_base64");
 	
 	 $image_parts = explode(";base64,", $data);
-	 
-	
 
         $image_type_aux = explode("image/", $image_parts[0]);
 
@@ -244,7 +242,76 @@ class Common_mdl extends CI_Model {
 	return false;
 	}
 
-	 
+    function upload_documents()
+    {
+
+        if(empty($this->input->post("profile_image_base64"))) { return false; }
+
+        $folderPath = "images/profile_picture/";
+        $data  = $this->input->post("profile_image_base64");
+
+        $image_parts = explode(";base64,", $data);
+
+        $image_type_aux = explode("image/", $image_parts[0]);
+
+        $image_type = $image_type_aux[1];
+
+        $image_base64 = base64_decode($image_parts[1]);
+        $fine_name = uniqid() . '.'.$image_type;
+        $file = $folderPath . $fine_name;
+
+
+        $s =  file_put_contents($file, $image_base64);
+        chmod($file, 0777);
+
+        if($s)
+        {
+            return $fine_name;
+        }
+
+        return false;
+    }
+
+    public function update_files($user_id,$file){
+        $input = $this->input->post();
+        $data = array();
+        $data['document_type'] = $input["document_type"];
+        $data['document_name'] = $input["document_name"];
+        $data['document_url'] = $file;
+        $data['user_id'] = $user_id;
+        $this->db->insert('user_documents',$data);
+        return true;
+    }
+
+    function get_documents($user_id)
+    {
+
+        $this->db->select('id,document_name,document_url,document_type');
+        $this->db->from('user_documents');
+        $this->db->where('user_id', $user_id);
+        $t = $this->db->get();
+        $row = $t->result_array();
+
+//        echo '<pre>';print_r($row);exit;
+       return $row;
+    }
+
+    function delete_document($document_id){
+        $this->db->where('id',$document_id);
+        $this->db->delete('user_documents');
+        return true;
+    }
+
+    function document_details($document_id) {
+        $this->db->select('*');
+        $this->db->where('id',$document_id);
+
+        $t = $this->db->get('user_documents');
+        foreach ($t->result_array() as $row)
+        {
+            return $row;
+        }
+    }
 	 
  }
- 
+

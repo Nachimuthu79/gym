@@ -146,28 +146,37 @@ class Template {
 		
 		redirect(site_url($u));
 	}
-	
-	
-	function list_permissions($u) {
-		
-		
-		switch ($u) {
-			
-			case 'manager' :
-			
-			return array(
-							array('name'=>'dashboard', 'label'=> 'Dashboard' ,'editable' => 0 ),
-							array('name'=>'trainer', 'label'=> 'Trainer' ,'editable' => 1 ),
-							array('name'=>'staff', 'label'=> 'Staff' ,'editable' => 1 ),
-							array('name'=>'client', 'label'=> 'Client' ,'editable' => 1 )
-						);
-			break;
-			
-			
-			
-		}
-		
-	}
+
+
+    function list_permissions($u) {
+
+
+        switch ($u) {
+            case 'manager' :
+                return array(
+                    array('name'=>'dashboard', 'label'=> 'Dashboard' ,'editable' => 0 ),
+                    array('name'=>'trainer', 'label'=> 'Trainer' ,'editable' => 1 ),
+                    array('name'=>'staff', 'label'=> 'Staff' ,'editable' => 1 ),
+                    array('name'=>'client', 'label'=> 'Client' ,'editable' => 1 )
+                );
+                break;
+            case 'trainer' :
+                return array(
+                    array('name'=>'dashboard', 'label'=> 'Dashboard' ,'editable' => 0 ),
+                    array('name'=>'client', 'label'=> 'Client' ,'editable' => 1 )
+                );
+                break;
+            case 'staff' :
+                return array(
+                    array('name'=>'dashboard', 'label'=> 'Dashboard' ,'editable' => 0 ),
+                    array('name'=>'trainer', 'label'=> 'Trainer' ,'editable' => 1 ),
+                    array('name'=>'client', 'label'=> 'Client' ,'editable' => 1 )
+                );
+                break;
+
+        }
+
+    }
 	
 	function price($price,$limit=2) {
 		

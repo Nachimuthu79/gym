@@ -22,6 +22,10 @@ class Trainer_mdl extends CI_Model {
             $data['daily_target'] = $input['daily_target'];
             $data['address_line1'] = $input['address_line1'];
             $data['address_line2'] = $input['address_line2'];
+            if(($profile_pic = $this->common_mdl->upload_profile_pic_base64()) != false)
+            {
+                $data['profile_pic'] = $profile_pic;
+            }
             $data['status'] = isset($input['status']) ? $input['status'] : 0;
 
             $this->db->insert('trainer', $data);
@@ -54,6 +58,10 @@ class Trainer_mdl extends CI_Model {
         $data['daily_target'] =$input['daily_target'];
         $data['address_line1'] =$input['address_line1'];
         $data['address_line2'] =$input['address_line2'];
+        if(($profile_pic = $this->common_mdl->upload_profile_pic_base64()) != false)
+        {
+            $data['profile_pic'] = $profile_pic;
+        }
         $data['status'] = isset($input['status']) ? $input['status'] : 0;
 		
 		$this->db->where('trainer_id',$trainer_id);
@@ -79,9 +87,6 @@ class Trainer_mdl extends CI_Model {
 	
 	function delete_trainer($trainer_id)
     {
-		
-		//~ echo $trainer_id;
-		//~ die(); 
 		$this->db->where('trainer_id',$trainer_id);
 		$this->db->update('trainer',array('is_deleted'=>1));
 		return true;
@@ -135,15 +140,17 @@ class Trainer_mdl extends CI_Model {
 	
 		foreach($records as $r)
 		{
+            $created_date = strtotime($r['created_at']);
 			$datas[]= array( $r['name']  ,
 							$r['address_line1'].', '.$r['address_line2'].','.$r['city'],
-//                            $r['phone'],
+                            date("Y-m-d", $created_date),
 							($r['status']) ? 'Active' : 'Deactive','<div class="btn-group">
                           <button type="button" class="btn btn-default dropdown-toggle dropdown-icon" data-toggle="dropdown">
                           Action
                           </button>
                           <div class="dropdown-menu">
                             <a class="dropdown-item" href="'.site_url('trainers/edit/'.$r['trainer_id']).'">Edit Details</a>
+                            <a class="dropdown-item" href="'.site_url('trainers/settings/'.$r['trainer_id']).'">Edit Settings</a>
                             <a class="dropdown-item" onclick="return confirm(\'Do you want to delete the trainer?\')" href="'.site_url('trainers/delete/'.$r['trainer_id']).'">Delete</a>
                           </div>
                         </div>');

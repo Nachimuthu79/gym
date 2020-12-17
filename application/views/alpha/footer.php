@@ -4,9 +4,7 @@
 <script>
 var base_url = '<?php echo base_url(); ?>';	 
 </script>
- 
- 
- 
+
   <?php
 
 $js = array(
@@ -134,10 +132,8 @@ $js = array(
 									array('dist/js/demo.js')
 									);
 									
-										$this->template->loadJS($js); 
+										$this->template->loadJS($js);
 
-	 				
-	
-	
-	
-   
+   echo "<script>
+
+</script>";

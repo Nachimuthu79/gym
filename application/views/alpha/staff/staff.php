@@ -12,7 +12,7 @@
                   <tr>
                     <th>Name</th>
                     <th>Address</th>
-                    <th>Phone</th>
+                    <th>Created_date</th>
                     <th>Status</th>
                     <th>Actions</th>
                   </tr>

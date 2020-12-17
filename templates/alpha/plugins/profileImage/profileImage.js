@@ -61,14 +61,9 @@ $('.profile_picture_ca_but').click(function() {
 		$('.camara_window').hide(); 
 		camera_on =0 ;
 	}
-	
-	
-	
+
 	});
 
-
-
-		
 		
 $('.profile_picture_snpsh_but').click(function() {
 			Webcam.snap( function(data_uri) {
