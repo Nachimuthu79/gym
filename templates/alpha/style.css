@@ -125,7 +125,7 @@ display: inline-block;
 
 }
 
-#profile_image
+#profile_image, #site_icon_image
 {
     opacity: 0;
     width: 1px;
@@ -181,4 +181,28 @@ display: inline-block;
     top: 0;
     right: 0;
     color: #ff5353;
+}
+
+.site_logo, .site_icon
+{
+    width: auto;
+    height: auto;
+    max-width: 300px;
+    display:block;
+    margin: auto;
+}
+
+.site_icon_up_but
+{display: inline-block;
+    max-width: 125px;
+    margin: auto !important;
+    margin-top: 25px !important;
+}
+
+.site_logo, .site_icon {
+    max-width: 104px !important;
+}
+
+.select2-container .select2-selection--single {
+    height:auto !important;
 }

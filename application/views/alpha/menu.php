@@ -66,7 +66,7 @@
       </li>
 	
 	 <li class="nav-item">
-        <a class="nav-link "  href="<?php echo site_url('dashboard/settings'); ?>" role="button"><i
+        <a class="nav-link "  href="<?php echo site_url('/settings/add'); ?>" role="button"><i
             class="fas fa-cog"></i></a>
       </li>
 	

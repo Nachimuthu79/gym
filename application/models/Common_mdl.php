@@ -312,6 +312,64 @@ class Common_mdl extends CI_Model {
             return $row;
         }
     }
+
+    function upload_site_logo_base64()
+    {
+        if(empty($this->input->post("site_logo_base64"))) { return false; }
+
+        $folderPath = "images/site_logo/";
+        $data  = $this->input->post("site_logo_base64");
+
+        $image_parts = explode(";base64,", $data);
+
+        $image_type_aux = explode("image/", $image_parts[0]);
+
+        $image_type = $image_type_aux[1];
+
+        $image_base64 = base64_decode($image_parts[1]);
+        $fine_name = uniqid() . '.'.$image_type;
+        $file = $folderPath . $fine_name;
+
+
+        $s =  file_put_contents($file, $image_base64);
+        chmod($file, 0777);
+
+        if($s)
+        {
+            return $fine_name;
+        }
+
+        return false;
+    }
+
+    function upload_site_icon_base64()
+    {
+        if(empty($this->input->post("site_icon_base64"))) { return false; }
+
+        $folderPath = "images/site_logo/";
+        $data  = $this->input->post("site_icon_base64");
+
+        $image_parts = explode(";base64,", $data);
+
+        $image_type_aux = explode("image/", $image_parts[0]);
+
+        $image_type = $image_type_aux[1];
+
+        $image_base64 = base64_decode($image_parts[1]);
+        $fine_name = uniqid() . '.'.$image_type;
+        $file = $folderPath . $fine_name;
+
+
+        $s =  file_put_contents($file, $image_base64);
+        chmod($file, 0777);
+
+        if($s)
+        {
+            return $fine_name;
+        }
+
+        return false;
+    }
 	 
  }
 

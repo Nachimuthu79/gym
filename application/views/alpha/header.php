@@ -3,11 +3,11 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title><?php echo $pagetitle ?></title> 
-
+  <title><?php echo $pagetitle ?></title>
 
   <!-- Tell the browser to be responsive to screen width -->
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+<!--    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet" />-->
   
 <?php
 
@@ -39,6 +39,9 @@ if(isset($plugins) && is_array($plugins) ) {
 			}
 			if($pluginname == "datepicker") {
                 $css[] = array('plugins/bootstrap-datepicker/bootstrap-datepicker.min.css');
+            }
+            if($pluginname == "select2plugin") {
+                $css[]= array('plugins/select2/css/select2.min.css');
             }
 			
 			

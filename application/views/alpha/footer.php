@@ -50,6 +50,10 @@ if(isset($plugins) && is_array($plugins) ) {
 			$js[]= array('plugins/profileImage/webcam.min.js');
 			$js[]= array('plugins/profileImage/profileImage.js');
 			}
+
+            if($pluginname == "sitelogo") {
+                $js[]= array('plugins/sitelogo/siteLogo.js');
+            }
 			
 			if($pluginname == "switchButton") {
 				$js[]= array('plugins/bootstrap-switch/js/bootstrap-switch.min.js');
@@ -68,6 +72,9 @@ if(isset($plugins) && is_array($plugins) ) {
 			if($pluginname == "datepicker") {
                 $js[]= array('plugins/moment/moment.min.js');
                 $js[]= array('plugins/bootstrap-datepicker/bootstrap-datepicker.min.js');
+            }
+            if($pluginname == "select2plugin") {
+                $js[]= array('plugins/select2/js/select2.min.js');
             }
 			
 		}
@@ -134,6 +141,5 @@ $js = array(
 									
 										$this->template->loadJS($js);
 
-   echo "<script>
-
+   echo "
 </script>";

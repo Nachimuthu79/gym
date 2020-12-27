@@ -42,7 +42,6 @@ function __construct() {
 		$data['path'] = 'staff/staff';
 		$data['plugins']['datatable'] = 1 ;
 		$data['condition']['brach_select'] = 1 ;
-
 		$this->template->load_template($data);
 	}
 
